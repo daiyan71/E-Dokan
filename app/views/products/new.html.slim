@@ -1,0 +1,5 @@
+.card#forms
+  = simple_form_for @product, html: { class: 'form' } do |f|
+    .card-header
+      h5.header-text = 'Product'
+      = render partial: 'form', locals: { f: f }

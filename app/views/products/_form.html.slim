@@ -1,0 +1,74 @@
+.card
+  - if @product.errors.any?
+    .card-header.ul-padding-left
+      = f.error_notification.html_safe
+      ul.alert.alert-danger
+      - @product.errors.full_messages.each do |message|
+        li = message
+  .card-body
+    .row.pl-0
+      .col-md-12
+        fieldset.form-group
+          .row
+            .col-md-4
+              label Product Category
+              span.req-field title="required" *
+            .col-md-7
+              = f.collection_select :product_category_id, ProductCategory.all, :id, :category_name, class: "form-control form-control-sm"
+
+        fieldset.form-group
+          .row
+            .col-md-4
+              label Available
+              span.req-field title="required" *
+            .col-md-7
+              = f.check_box :available
+        fieldset.form-group
+          .row
+            .col-md-4
+              label Name
+              span.req-field title="required" *
+            .col-md-7
+              = f.text_field :name
+    .row.pl-0
+      .col-md-12
+        fieldset.form-group
+          .row
+            .col-md-4
+              label Image
+              span.req-field title="required" *
+            .col-md-7
+              = f.file_field :image
+        fieldset.form-group
+          .row
+            .col-md-4
+              label Quantity
+              span.req-field title="required" *
+            .col-md-7
+              = f.text_field :quantity
+        fieldset.form-group
+          .row
+            .col-md-4
+              label Price
+              span.req-field title="required" *
+            .col-md-7
+              = f.text_field :price
+    .row.pl-0
+      .col-md-12
+        fieldset.form-group
+          .row
+            .col-md-4
+              label Description
+              span.req-field title="required" *
+            .col-md-7
+              = f.text_area :description
+    = button_tag type: 'submit', class: 'button btn btn-sm btn-primary submit-button'
+      i class = " #{ @product.persisted? ? 'icon-arrow-up-circle' : 'icon-doc'} icons mt-0 mr-2" role="status"
+      span.spinner-border.spinner-border-sm.mr-2.d-none aria-hidden="true" role="status"
+      span = @product.persisted? ? "Update" : 'Save'
+
+    = link_to products_path,
+            class: 'button btn btn-sm btn-secondary ml-2 loader-button'
+      i.fa.fa-close.mr-2 role="status"
+      span.spinner-border.spinner-border-sm.mr-2.d-none aria-hidden="true" role="status"
+      span Discard

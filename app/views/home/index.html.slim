@@ -1,8 +1,17 @@
 h1 Home#index
 p Find me in app/views/home/index.html.slim
 
+- if current_user.present?
+  - if current_user.image.present?
+    = image_tag current_user.image.url, alt: 'Image'
+  = link_to edit_user_registration_path(current_user), class: "btn btn-info"
+    i.fa.fa-line-chart.mr-1
+    span Edit
 
-= image_tag current_user.image.url, alt: 'Image'
-= link_to edit_user_registration_path(current_user), class: "btn btn-info"
-  i.fa.fa-line-chart.mr-1
-  span Edit
+  = link_to destroy_user_session_path, method: :delete, class: "btn btn-danger"
+    i.fa.fa-line-chart.mr-1
+    span Sign Out
+- else
+  = link_to new_user_session_path, class: "btn btn-info"
+    i.fa.fa-line-chart.mr-1
+    span Sign in
