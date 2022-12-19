@@ -1,0 +1,8 @@
+h1 Home#index
+p Find me in app/views/home/index.html.slim
+
+
+= image_tag current_user.image.url, alt: 'Image'
+= link_to edit_user_registration_path(current_user), class: "btn btn-info"
+  i.fa.fa-line-chart.mr-1
+  span Edit

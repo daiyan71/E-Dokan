@@ -42,6 +42,11 @@ gem 'redis', '~> 4.0'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'dotenv-rails'
+gem 'devise'
+gem 'carrierwave', '~> 2.0'
+gem "mini_magick"
+gem 'font-awesome-rails'
+gem 'font-awesome-sass'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
