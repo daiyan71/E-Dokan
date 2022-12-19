@@ -19,16 +19,5 @@
 
 
 $(document).ready(function(){
-    $('#master').hide();
-    $('#visa').hide();
-    let pay_type = $('#credit_card');
-    pay_type.on('change', function () {
-        if(pay_type.val() == 'VISA'){
-            $('#master').hide(500);
-            $('#visa').show(500);
-        }else{
-            $('#visa').hide(500);
-            $('#master').show(500);
-        }
-    })
+
 });
