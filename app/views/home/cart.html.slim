@@ -1,0 +1,44 @@
+card#list
+  .card-header
+    .head
+      span.header-text = 'Products'
+      span.card-header-actions
+  .card.m-0
+    .card-body.p-0
+      .filter-section
+
+      .show-list
+        - unless @current_cart.present?
+          .m-2.text-center = "There is no item"
+        - else
+          .table-responsive
+            table.table.table-sm#dataTable_no_ajax_with_number
+              thead
+                tr.text-center
+                  th Product Name
+                  th Quantity
+                  th Unit Price
+                  th Total Price
+                  th
+
+              tbody
+                - total_price = 0
+                - @current_cart.cart_items.each do |item|
+                  tr.shadow-style.clickable-row
+                    td = link_to item.product.name, product_details_path(product_id: item.product)
+                    td = item.quantity
+                    td = item.product.price
+                    td = item.product.price * item.quantity
+                    - total_price +=  (item.product.price * item.quantity)
+                    td
+                    / td = link_to 'Destroy', product, data: { confirm: 'Are you sure?' }, method: :delete
+
+            br
+
+            h3
+              = "Total Price: #{total_price}"
+
+            = link_to destroy_cart_path, method: :delete, class:"button btn btn-sm btn-danger text-white"
+              i.fa.fa-trash.mr-2 role='status'
+              span.spinner-border.spinner-border-sm.mr-2.d-none aria-hidden="true" role="status"
+              span Empty Cart

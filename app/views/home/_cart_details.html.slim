@@ -1,0 +1,14 @@
+.card.p-4
+  table
+    tr
+      td.font-weight-bold.mr-2 = "1 Item is added to your cart!"
+    tr
+      td.font-weight-bold.mr-2 = "Item Details"
+    tr
+      td.font-weight-bold.mr-2 = "Item Name: "
+      td = @product.name
+    tr
+      td.font-weight-bold.mr-2 = "Item Price: "
+      td = @product.price
+    tr
+      = link_to "View Cart", cart_path

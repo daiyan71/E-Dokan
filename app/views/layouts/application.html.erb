@@ -11,30 +11,20 @@
   </head>
 
   <body>
-    <div class = "main">
-      <%if current_user.present? && current_user.is_admin? %>
-        <%=render 'shared/nav_bar_admin' %>
-      <%else %>
-        <%=render 'shared/nav_bar_user' %>
-      <%end %>
-
+  <%if current_user.present? && current_user.is_admin? %>
+    <%=render 'shared/nav_bar_admin' %>
+  <%else %>
+    <%=render 'shared/nav_bar_user' %>
+  <%end %>
+  <div class = "main">
       <div class="container-fluid align-self-auto">
-        <div class="col-md-6 mx-auto">
-          <%flash.each do |type, message| %>
-            <div class="text-center alert alert-dismissible mb-0 <%=bootstrap_class_for(type) %>" role="alert">
-              <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
-              <%=message %>
-            </div>
-          <% end %>
+        <div id="flash_div">
+          <%= render "layouts/flash" %>
+        </div>
+        <div>
+          <%= yield %>
         </div>
       </div>
-      <div>
-        <%= yield %>
-      </div>
     </div>
-<!--    <p class="notice"><%#= notice %></p>-->
-<!--    <p class="alert"><%#= alert %></p>-->
-
-
   </body>
 </html>
