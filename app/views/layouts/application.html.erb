@@ -12,6 +12,12 @@
 
   <body>
     <div class = "main">
+      <%if current_user.present? && current_user.is_admin? %>
+        <%=render 'shared/nav_bar_admin' %>
+      <%else %>
+        <%=render 'shared/nav_bar_user' %>
+      <%end %>
+
       <div class="container-fluid align-self-auto">
         <div class="col-md-6 mx-auto">
           <%flash.each do |type, message| %>
