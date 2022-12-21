@@ -1,0 +1,42 @@
+.card
+  -if @<%= model_resource_name %>.errors.any?
+    .card-header.ul-padding-left
+      = f.error_notification
+      ul.alert.alert-danger
+        - @<%= model_resource_name %>.errors.full_messages.each do |message|
+          li = message
+  .card-body.row.justify-content-center.m-0
+    .col-md-6
+    <%- attributes.each do |attribute| -%>
+      fieldset.form-group
+        .row
+          .col-md-4
+            label <%= attribute.column_name.titleize %>
+        <%- if attribute.field_type.to_s.eql?("date_select") -%>
+          .col-md-8
+            = f.text_field :<%= attribute.column_name %>, autocomplete: "off", class: 'form-control form-control-sm datepicker'
+        <%- elsif attribute.field_type.to_s.eql?("time_select") -%>
+          .col-md-4
+            = f.text_field :<%= attribute.column_name %>, value: show_time(f&.object&.<%= attribute.column_name %>), autocomplete: "off", class: 'form-control form-control-sm clockpicker'
+        <%- elsif attribute.reference? -%>
+          .col-md-8
+            = collection_select(:<%= model_resource_name %>, :<%= attribute.name %>_id, <%= attribute.name.camelize %>.all, :id, :id, {:prompt=>true}, {:class=>'form-control form-control-sm'})
+        <%- elsif attribute.type.to_s == 'boolean' -%>
+          .col-md-8
+            = f.check_box :<%= attribute.column_name %>, class: 'form-check-input ml-0'
+        <%- elsif attribute.type.to_s == 'decimal' -%>
+          .col-md-8
+            = f.<%= attribute.field_type %> :<%= attribute.column_name %>, type: 'number', step: '.0000001', class: 'form-control form-control-sm'
+        <%- elsif attribute.type.to_s == 'integer' -%>
+          .col-md-8
+            = f.<%= attribute.field_type %> :<%= attribute.column_name %>, type: 'number', class: 'form-control form-control-sm'
+        <%- elsif attribute.column_name.match(/email/) -%>
+          .col-md-8
+            = f.<%= attribute.field_type %> :<%= attribute.column_name %>, type: 'email', class: 'form-control form-control-sm'
+        <%- else -%>
+          .col-md-8
+            = f.<%= attribute.field_type %> :<%= attribute.column_name %>, class: 'form-control form-control-sm'
+        <%- end -%>
+    <%- end -%>
+      = submit_tag 'Save', class: 'button btn btn-sm btn-primary submit-button'
+      = link_to 'Discard', <%= plural_table_name %>_path, class: 'button btn btn-sm btn-secondary ml-2 loader-button'

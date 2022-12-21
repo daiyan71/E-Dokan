@@ -1,0 +1,28 @@
+.card#show
+  .card-header
+    .header-text = "<%= singular_table_name.titleize %>"
+    .card
+      .card-body
+        table.table.table-sm
+          thead.thead-light
+            tr
+              th = "Field"
+              th = "Value"
+          tbody
+            <%- attributes.each do |attribute| -%>
+            tr
+              td = '<%= attribute.column_name.titleize %>'
+              <%- if attribute.type.to_s == 'boolean' -%>
+              td
+                - if @<%= singular_table_name %>.<%= attribute.column_name %>
+                  i.fa.fa-check-circle.fa-lg
+                - else
+                  i.fa.fa-circle-o.fa-lg
+              <%- elsif attribute.type.to_s == 'time' -%>
+                td = show_time(@<%= singular_table_name %>.<%= attribute.column_name %>)
+              <%- else -%>
+              td = @<%= singular_table_name %>.<%= attribute.column_name %>
+              <%- end -%>
+            <%- end -%>
+        = link_to "Back", <%= plural_table_name %>_path, class: 'button btn btn-sm btn-secondary'
+        = link_to "Edit", edit_<%= singular_table_name %>_path, class: 'button btn btn-sm btn-primary edit-button'

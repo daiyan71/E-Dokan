@@ -1,0 +1,6 @@
+.card#forms
+  = simple_form_for @<%= model_resource_name %>, html: { class: 'form' } do |f|
+    .card-header
+      h5.header-text = 'Edit <%= plural_table_name.titleize %>'
+      = render partial: 'form', locals: { f: f }
+

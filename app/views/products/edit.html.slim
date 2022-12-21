@@ -1,8 +1,6 @@
-h1 Editing product
-
-== render 'form'
-
-=> link_to 'Show', @product
-'|
-=< link_to 'Back', products_path
+.card#forms
+  = simple_form_for @product, html: { class: 'form' } do |f|
+    .card-header
+      h5.header-text = 'Edit Product'
+      = render partial: 'form', locals: { f: f }
 
