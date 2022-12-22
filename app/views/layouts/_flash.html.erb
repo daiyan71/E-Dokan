@@ -1,0 +1,8 @@
+<div class="col-md-6 mx-auto">
+  <%flash.each do |type, message| %>
+    <div class="text-center alert alert-dismissible mb-0 <%=bootstrap_class_for(type) %>" role="alert">
+      <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+      <%=message %>
+    </div>
+  <% end %>
+</div>

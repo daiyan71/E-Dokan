@@ -1,0 +1,49 @@
+.card#list
+  .card-header
+    .head
+      span.header-text = '<%= plural_table_name.titleize %> List'
+      span.card-header-actions
+        = link_to  new_<%= singular_route_name %>_path,
+                class: 'button btn btn-block btn-primary'
+          i.fa.fa-plus.mr-2 role='status'
+          span.spinner-border.spinner-border-sm.mr-2.d-none aria-hidden="true" role="status"
+          span Add new
+    .card
+      .card-body.p-0
+        .filter-section
+
+        .show-list
+          - unless @<%= plural_table_name %>.present?
+            .m-2.text-center = "There is no item"
+          - else
+            .table-responsive
+              table.table.table-sm
+                thead.thead-light
+                  tr
+                  <%- attributes.each do |attribute| -%>
+                    th = '<%= attribute.column_name.titleize %>'
+                  <%- end -%>
+                    th.nosort = "Action"
+                tbody
+                  - @<%= plural_table_name %>.each do |<%= singular_table_name %>|
+                    tr
+                      <%- attributes.each do |attribute| -%>
+                        <%- if attribute.type.to_s == 'boolean' -%>
+                      td
+                        - if <%= singular_table_name %>.<%= attribute.column_name %>
+                          i.fa.fa-check-circle.fa-lg
+                        - else
+                          i.fa.fa-circle-o.fa-lg
+                        <%- elsif attribute.type.to_s == 'time' -%>
+                      td = show_time(<%= singular_table_name %>.<%= attribute.column_name %>)
+                        <%- else -%>
+                      td = <%= singular_table_name %>.<%= attribute.column_name %>
+                        <%- end -%>
+                      <%- end -%>
+                      td.actions
+                        = link_to <%= singular_table_name %>_path(<%= singular_table_name %>), title: 'Show'
+                          i.fa.fa-tv.fa-lg
+                        = link_to edit_<%= singular_table_name %>_path(<%= singular_table_name %>), title: 'Edit'
+                          i.fa.fa-pencil.fa-lg
+                        = link_to <%= singular_table_name %>_path(<%= singular_table_name %>), method: :delete, data: {confirm: 'Are you sure?'}, title: 'Delete'
+                          i.fa.fa-trash.fa-lg

@@ -11,9 +11,20 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-
-    <%= yield %>
+  <%if current_user.present? && current_user.is_admin? %>
+    <%=render 'shared/nav_bar_admin' %>
+  <%else %>
+    <%=render 'shared/nav_bar_user' %>
+  <%end %>
+  <div class = "main">
+      <div class="container-fluid align-self-auto">
+        <div id="flash_div">
+          <%= render "layouts/flash" %>
+        </div>
+        <div>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

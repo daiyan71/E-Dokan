@@ -1,0 +1,5 @@
+- object = render partial: 'home/cart_details',
+        locals: { status_data: @product }
+|
+  $("#cart_details").html("#{ escape_javascript(object) }");
+  $("#click").click();
