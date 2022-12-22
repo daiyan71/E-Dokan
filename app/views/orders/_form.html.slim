@@ -1,0 +1,51 @@
+.card
+  - if @order.errors.any?
+    .card-header.ul-padding-left
+      = f.error_notification.html_safe
+      ul.alert.alert-danger
+      - @order.errors.full_messages.each do |message|
+        li = message
+  .card-body
+    .row.pl-0
+      .col-md-12
+        fieldset.form-group
+          .row
+            .col-md-4
+              label Name
+              span.req-field title="required" *
+            .col-md-7
+              = f.text_field :name
+    .row.pl-0
+      .col-md-12
+        fieldset.form-group
+          .row
+            .col-md-4
+              label Contact Number
+              span.req-field title="required" *
+            .col-md-7
+              = f.text_field :contact_number
+    .row.pl-0
+      .col-md-12
+        fieldset.form-group
+          .row
+            .col-md-4
+              label Address
+              span.req-field title="required" *
+            .col-md-7
+              = f.text_area :address
+        fieldset.form-group
+          .row
+            .col-md-4
+              label Total Amount
+            .col-md-7
+              = f.text_field :total_amount, value: @current_cart.total_amount, disabled: :true
+    = button_tag type: 'submit', class: 'button btn btn-sm btn-primary submit-button'
+      i class = "icon-doc icons mt-0 mr-2" role="status"
+      span.spinner-border.spinner-border-sm.mr-2.d-none aria-hidden="true" role="status"
+      span = 'Place Order Now'
+
+    = link_to cart_path,
+            class: 'button btn btn-sm btn-secondary ml-2 loader-button'
+      i.fa.fa-close.mr-2 role="status"
+      span.spinner-border.spinner-border-sm.mr-2.d-none aria-hidden="true" role="status"
+      span Discard
