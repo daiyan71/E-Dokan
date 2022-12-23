@@ -33,6 +33,8 @@ class OrdersController < ApplicationController
     end
 
     if @order.save
+      @current_cart.destroy!
+      session[:cart_id] = nil
       redirect_to payment_order_path(@order), notice: "Order Placed. Please Pay Now"
     else
       render :new

@@ -8,8 +8,10 @@ card#form
       .filter-section
 
       .show-list
-        - unless @current_cart.present?
-          .m-2.text-center = "There is no item"
+        - if !@current_cart.present? || @current_cart&.cart_items.empty?
+          .m-2.text-center = "No Item in cart"
+          .m-2.text-center = "Add some product now"
+          .m-2.text-center = link_to "View Products", root_path
         - else
           .table-responsive
             table.table.table-sm#dataTable_no_ajax_with_number
