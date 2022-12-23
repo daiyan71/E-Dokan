@@ -4,7 +4,9 @@ class Order < ApplicationRecord
 
   accepts_nested_attributes_for :order_items, allow_destroy: true
 
-  UNPAID = 1
+  validates :name, :address, :contact_number, :payment_status, presence: true
+
+  UNPAID = 0
 
   enum payment_status:{
       'Unpaid': 0,

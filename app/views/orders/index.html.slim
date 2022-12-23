@@ -1,0 +1,43 @@
+card#form
+  .card-header
+    .head
+      span.header-text = 'Cart'
+      span.card-header-actions
+  .card.m-0
+    .card-body.p-0
+      .filter-section
+
+      .show-list
+        - unless @orders.present?
+          .m-2.text-center = "There is no item"
+        - else
+          .table-responsive
+            table.table.table-sm#dataTable_no_ajax_with_number
+              thead
+                tr.text-center
+                  th Sl
+                  th Order Date
+                  th Address
+                  th Total Amount
+                  th Payment Status
+                  th Receipt
+                  th.text-center Action
+
+              tbody
+                - @orders.each_with_index do |order, idx|
+                  tr.shadow-style.clickable-row
+                    td = idx+1
+                    td = order.created_at
+                    td = order.address
+                    td = order.total_amount
+                    td = order.payment_status
+                    - unless order.receipt_url.nil?
+                      td = link_to "View Receipt", order.receipt_url
+                    - else
+                      td
+                    - if order.Unpaid?
+                      td
+                        = link_to "Cancel", cancel_order_path(order), method: :delete, class: "button btn btn-sm btn secondary"
+                        = link_to "Pay Now", payment_order_path(order), class: "button btn btn-sm btn secondary"
+                    - else
+                      td

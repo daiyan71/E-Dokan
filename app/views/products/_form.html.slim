@@ -3,8 +3,8 @@
     .card-header.ul-padding-left
       = f.error_notification.html_safe
       ul.alert.alert-danger
-      - @product.errors.full_messages.each do |message|
-        li = message
+        - @product.errors.full_messages.each do |message|
+          li = message
   .card-body
     .row.pl-0
       .col-md-12

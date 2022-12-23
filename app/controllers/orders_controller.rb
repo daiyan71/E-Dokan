@@ -1,18 +1,24 @@
 class OrdersController < ApplicationController
   include CurrentCart
-  before_action :verify_cart, only: [:new, :create]
-  before_action :set_order, only: [:payment]
+  before_action :verify_user_and_cart, only: [:new, :create]
+  before_action :set_order, only: [:payment, :cancel]
+  before_action :check_user, only: [:index]
+
+  def index
+    @orders = current_user.orders.order(created_at: :desc)
+  end
+
   def new
     @order = Order.new
   end
 
   def create
-    order = Order.new(order_params)
+    @order = Order.new(order_params)
     ActiveRecord::Base.transaction do
-      order.user = current_user
-      order.payment_status = Order::UNPAID
-      order.total_amount = @current_cart.total_amount
-      order.save
+      @order.user = current_user
+      @order.payment_status = Order::UNPAID
+      @order.total_amount = @current_cart.total_amount
+      @order.save
       order_items = []
       @current_cart.cart_items.each do |cart_item|
         order_items << OrderItem.new(
@@ -23,17 +29,31 @@ class OrdersController < ApplicationController
         )
 
       end
-      order.order_items = order_items
+      @order.order_items = order_items
     end
 
-    if order.save!
-      redirect_to payment_order_path(order), notice: "Order Placed. Please Pay Now"
+    if @order.save
+      @current_cart.destroy!
+      session[:cart_id] = nil
+      redirect_to payment_order_path(@order), notice: "Order Placed. Please Pay Now"
     else
-      redirect_to new_order_path, notice: "Could not place the order, please try again"
+      render :new
     end
   end
 
   def payment
+    unless @order.Unpaid?
+      redirect_to orders_path, alert: "Payment Process Completed"
+    end
+  end
+
+  def cancel
+    unless @order.Unpaid?
+      redirect_to orders_path, alert: "Can not be canceled"
+    else
+      @order.destroy
+      redirect_to orders_path, notice: "Canceled Successfully"
+    end
   end
 
   private
@@ -47,10 +67,19 @@ class OrdersController < ApplicationController
     params.require(:order).permit(:name, :contact_number, :address, :total_amount
     )
   end
-  def verify_cart
+  def verify_user_and_cart
     get_current_cart
     if @current_cart.nil?
-      redirect_to root_path, notice: "EMpty Cart"
+      redirect_to root_path, notice: "Empty Cart"
+    end
+    unless current_user.present?
+      session[:order_page] = true
+      redirect_to new_user_session_path, notice: "Sign in first"
+    end
+  end
+  def check_user
+    unless current_user.present?
+      redirect_to root_path, alert: "You Don't have access!"
     end
   end
 end

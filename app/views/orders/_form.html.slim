@@ -1,10 +1,10 @@
-.card
+.card#forms
   - if @order.errors.any?
-    .card-header.ul-padding-left
+    .card-header.ul-padding-left.bg-danger
       = f.error_notification.html_safe
       ul.alert.alert-danger
-      - @order.errors.full_messages.each do |message|
-        li = message
+        - @order.errors.full_messages.each do |message|
+          li = message
   .card-body
     .row.pl-0
       .col-md-12
@@ -14,7 +14,7 @@
               label Name
               span.req-field title="required" *
             .col-md-7
-              = f.text_field :name
+              = f.text_field :name, class: "form-control form-control-sm"
     .row.pl-0
       .col-md-12
         fieldset.form-group
@@ -23,7 +23,7 @@
               label Contact Number
               span.req-field title="required" *
             .col-md-7
-              = f.text_field :contact_number
+              = f.text_field :contact_number, class: "form-control form-control-sm"
     .row.pl-0
       .col-md-12
         fieldset.form-group
@@ -32,13 +32,13 @@
               label Address
               span.req-field title="required" *
             .col-md-7
-              = f.text_area :address
+              = f.text_area :address, class: "form-control form-control-sm"
         fieldset.form-group
           .row
             .col-md-4
               label Total Amount
             .col-md-7
-              = f.text_field :total_amount, value: @current_cart.total_amount, disabled: :true
+              = f.text_field :total_amount, value: @current_cart.total_amount, disabled: :true, class: "form-control form-control-sm"
     = button_tag type: 'submit', class: 'button btn btn-sm btn-primary submit-button'
       i class = "icon-doc icons mt-0 mr-2" role="status"
       span.spinner-border.spinner-border-sm.mr-2.d-none aria-hidden="true" role="status"
