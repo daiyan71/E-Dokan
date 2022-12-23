@@ -16,6 +16,7 @@
 //= require_tree .
 //= require jquery
 //= require bootstrap.min
+//= require toastr
 
 
 $(document).ready(function(){

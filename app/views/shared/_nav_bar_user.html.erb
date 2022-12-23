@@ -22,6 +22,11 @@
       <li class="nav-item">
         <a class="nav-link i fa fa-shopping-cart" href="/cart">Cart</a>
       </li>
+      <li class="nav-item form-inline active">
+        <%if current_user.present? %>
+          <%=link_to "Your Orders", orders_path, class: "nav-link i fa fa-list mr-1 "%>
+        <%end %>
+      </li>
     </ul>
     <form class="ml-5 form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -34,6 +39,7 @@
           <%=link_to "Sign in", new_user_session_path, class: "nav-link i fa fa-sign-inn mr-1 "%>
         <%end %>
       </li>
+
     </form>
 
   </div>

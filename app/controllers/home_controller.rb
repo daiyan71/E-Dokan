@@ -1,7 +1,12 @@
 class HomeController < ApplicationController
   include CurrentCart
   before_action :set_current_cart, only: [:cart, :destroy_cart]
+
   def index
+    if session[:order_page] == true
+      session[:order_page] = nil
+      redirect_to cart_path
+    end
     if params[:category].present?
       @products = Product.where(available: true,product_category_id: params[:category])
     else
@@ -43,6 +48,15 @@ class HomeController < ApplicationController
       redirect_to root_path, notice: "Cart is empty now!"
     else
       redirect_to root_path, notice: "Could not empty the cart!"
+    end
+  end
+
+  def destroy_cart_item
+    cart_item = CartItem.find(params[:cart_item_id])
+    if cart_item.destroy!
+      redirect_to cart_path, notice: "Item removed from cart"
+    else
+      redirect_to cart_path, notice: "Item could not be removed from cart"
     end
   end
 

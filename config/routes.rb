@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  resources :orders, only: [:new, :create] do
+  resources :orders, only: [:new, :create, :index] do
     member do
       get :payment
+      delete :cancel
     end
   end
   resources :charges, only: [:new, :create]
@@ -15,6 +16,7 @@ Rails.application.routes.draw do
     get :add_to_cart
     get :cart
     delete :destroy_cart
+    delete :destroy_cart_item
   end
 
   root to: "home#index"

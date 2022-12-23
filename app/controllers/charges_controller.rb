@@ -6,11 +6,7 @@ class ChargesController < ApplicationController
   def create
     StripeChargesServices.new(charges_params, current_user).call
     path = Order.find(params[:order_id]).receipt_url
-    if path.nil?
-      redirect_to new_charge_path
-    else
-      redirect_to path
-    end
+    redirect_to orders_path
   end
 
   private
