@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :orders, only: [:new, :create] do
+    member do
+      get :payment
+    end
+  end
+  resources :charges, only: [:new, :create]
   resources :products
   resources :product_categories
   devise_for :users

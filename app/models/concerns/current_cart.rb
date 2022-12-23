@@ -13,4 +13,13 @@ module CurrentCart
       session[:cart_id] = @current_cart.id
     end
   end
+
+  def get_current_cart
+    if session[:cart_id].present?
+      @current_cart = Cart.find(session[:cart_id])
+    else
+      @current_cart = nil
+    end
+    @current_cart
+  end
 end
