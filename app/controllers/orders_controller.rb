@@ -7,14 +7,15 @@ class OrdersController < ApplicationController
   end
 
   def create
+    order = Order.new(order_params)
     ActiveRecord::Base.transaction do
-      @order = Order.new(order_params)
-      @order.user = current_user
-      @order.payment_status = Order::UNPAID
-      @order.total_amount = @current_cart.total_amount
-      @order.save
+      order.user = current_user
+      order.payment_status = Order::UNPAID
+      order.total_amount = @current_cart.total_amount
+      order.save
+      order_items = []
       @current_cart.cart_items.each do |cart_item|
-        @order.order_items.create(
+        order_items << OrderItem.new(
             product: cart_item.product,
             quantity: cart_item.quantity,
             unit_price: cart_item.product.price,
@@ -22,9 +23,14 @@ class OrdersController < ApplicationController
         )
 
       end
+      order.order_items = order_items
     end
 
-    redirect_to payment_order_path(@order)
+    if order.save!
+      redirect_to payment_order_path(order), notice: "Order Placed. Please Pay Now"
+    else
+      redirect_to new_order_path, notice: "Could not place the order, please try again"
+    end
   end
 
   def payment
