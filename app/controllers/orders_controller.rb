@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   include CurrentCart
   before_action :verify_user_and_cart, only: [:new, :create]
-  before_action :set_order, only: [:payment, :cancel]
+  before_action :set_order, only: [:payment, :destroy, :show]
   before_action :check_user, only: [:index]
 
   def index
@@ -42,13 +42,16 @@ class OrdersController < ApplicationController
     end
   end
 
+  def show
+  end
+
   def payment
     unless @order.Unpaid?
       redirect_to orders_path, alert: "Payment Process Completed"
     end
   end
 
-  def cancel
+  def destroy
     unless @order.Unpaid?
       redirect_to orders_path, alert: "Can not be canceled"
     else

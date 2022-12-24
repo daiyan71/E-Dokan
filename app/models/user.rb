@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :orders
+  has_many :ratings
   has_one :cart
   validates :contact_number, :user_name, presence: true
 end
