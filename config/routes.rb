@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :ratings, only: [:new, :create, :update]
+  resources :user_profiles, only: [:show]
   resources :orders, only: [:new, :create, :index, :show, :destroy] do
     member do
       get :payment

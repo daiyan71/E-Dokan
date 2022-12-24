@@ -22,23 +22,7 @@ card#form
         - else
           .text-center
             - @ratings.each do |rating|
-              h3 = "Review by #{rating.user.user_name}"
+              h3 = link_to rating.user.user_name, user_profile_path(rating.user)
               p = "Rating: #{rating.rating}"
               p = "Description:"
               = text_area_tag '', "#{rating.message}",cols: "50",  disabled: true
-
-          /   br
-          / .table-responsive
-          /   .table.table.table-sm.text-center
-          /     thead
-          /       tr.text-center
-          /         h3
-          /           = "Total Price: #{total_price}"
-          /         = link_to destroy_cart_path, method: :delete, class: "m-2 button btn btn-sm btn-danger text-white"
-          /         i.fa.fa-trash.mr-2 role='status'
-          /         span.spinner-border.spinner-border-sm.mr-2.d-none aria-hidden="true" role="status"
-          /         span Empty Cart
-          /         = link_to new_order_path, class: "m-2 button btn btn-sm btn-success text-white"
-          /         i.fa.fa-first-order.mr-2 role='status'
-          /         span.spinner-border.spinner-border-sm.mr-2.d-none aria-hidden="true" role="status"
-          /         span Place Order
