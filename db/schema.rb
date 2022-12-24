@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_24_145245) do
+ActiveRecord::Schema.define(version: 2022_12_24_155540) do
 
   create_table "cart_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.bigint "cart_id"
@@ -72,7 +72,20 @@ ActiveRecord::Schema.define(version: 2022_12_24_145245) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "current_rating", precision: 10, scale: 5
+    t.integer "rating_count"
     t.index ["product_category_id"], name: "index_products_on_product_category_id"
+  end
+
+  create_table "ratings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+    t.bigint "product_id"
+    t.bigint "user_id"
+    t.decimal "rating", precision: 10, scale: 5
+    t.text "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_ratings_on_product_id"
+    t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
@@ -99,4 +112,6 @@ ActiveRecord::Schema.define(version: 2022_12_24_145245) do
   add_foreign_key "order_items", "products"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "product_categories"
+  add_foreign_key "ratings", "products"
+  add_foreign_key "ratings", "users"
 end

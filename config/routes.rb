@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  resources :orders, only: [:new, :create, :index] do
+  resources :ratings, only: [:new, :create, :update]
+  resources :orders, only: [:new, :create, :index, :show, :destroy] do
     member do
       get :payment
-      delete :cancel
     end
   end
   resources :charges, only: [:new, :create]

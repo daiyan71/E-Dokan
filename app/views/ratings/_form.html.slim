@@ -1,0 +1,29 @@
+.card#forms
+  .card-body
+    .row.pl-0
+      .col-md-12
+        fieldset.form-group
+          .row
+            .col-md-4
+              label Rating
+            .col-md-7
+              = f.range_field :rating, :in => 1..5, :step => '1', class: "rating"
+    .row.pl-0
+      .col-md-12
+        fieldset.form-group
+          .row
+            .col-md-4
+              label Message
+            .col-md-7
+              = f.text_area :message, class: "form-control form-control-sm"
+              = f.hidden_field :product_id, value: @product.id
+              - unless @rating.nil?
+                = hidden_field_tag :rating_id, @rating_id
+    = button_tag type: 'submit', class: 'button btn btn-sm btn-primary submit-button'
+      i class = "icon-doc icons mt-0 mr-2" role="status"
+      span.spinner-border.spinner-border-sm.mr-2.d-none aria-hidden="true" role="status"
+      span = 'Submit Rating'
+    = link_to product_details_path(product_id: @product), method: :get, class: 'button btn btn-sm btn-primary ml-2 text-white'
+      i class = "icon-doc icons mt-0 mr-2" role="status"
+      span.spinner-border.spinner-border-sm.mr-2.d-none aria-hidden="true" role="status"
+      span = 'Back to Product'
