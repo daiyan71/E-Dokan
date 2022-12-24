@@ -15,4 +15,11 @@ class Order < ApplicationRecord
       'Failed': 3,
   }
 
+  after_create :save_order_number
+
+  def save_order_number
+    self.order_number = "OR-#{self.id}"
+    self.save
+  end
+
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_22_143558) do
+ActiveRecord::Schema.define(version: 2022_12_24_145245) do
 
   create_table "cart_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.bigint "cart_id"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 2022_12_22_143558) do
     t.text "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "order_number"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -66,7 +67,7 @@ ActiveRecord::Schema.define(version: 2022_12_22_143558) do
     t.boolean "available"
     t.string "name"
     t.string "image"
-    t.decimal "price", precision: 10, scale: 5
+    t.integer "price"
     t.integer "quantity"
     t.text "description"
     t.datetime "created_at", null: false

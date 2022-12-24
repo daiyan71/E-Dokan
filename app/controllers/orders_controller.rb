@@ -33,6 +33,7 @@ class OrdersController < ApplicationController
     end
 
     if @order.save
+      ReceiptMailer.send_receipt(current_user, @order).deliver_later
       @current_cart.destroy!
       session[:cart_id] = nil
       redirect_to payment_order_path(@order), notice: "Order Placed. Please Pay Now"

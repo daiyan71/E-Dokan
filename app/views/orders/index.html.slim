@@ -29,7 +29,7 @@ card#form
                     td = idx+1
                     td = order.created_at
                     td = order.address
-                    td = order.total_amount
+                    td = number_to_currency order.total_amount
                     td = order.payment_status
                     - unless order.receipt_url.nil?
                       td = link_to "View Receipt", order.receipt_url
