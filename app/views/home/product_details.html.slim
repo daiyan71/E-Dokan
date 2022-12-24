@@ -23,7 +23,7 @@
           h4.price
             | current price:
             span
-              = number_to_currency @product.price
+              = show_price @product.price
           .action
             = link_to add_to_cart_path(product_id: @product), remote: true, class: "add-to-cart btn btn-default"
               i.fa.fa-shopping-cart

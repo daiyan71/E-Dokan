@@ -29,7 +29,7 @@
       </li>
     </ul>
     <form class="ml-5 form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <input class="form-control mr-sm-2" name="search_product" type="search" placeholder="Search product" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       <li class="nav-item form-inline active">
         <%if current_user.present? %>
@@ -39,7 +39,6 @@
           <%=link_to "Sign in", new_user_session_path, class: "nav-link i fa fa-sign-inn mr-1 "%>
         <%end %>
       </li>
-
     </form>
 
   </div>

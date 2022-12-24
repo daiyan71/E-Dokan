@@ -9,6 +9,9 @@ class HomeController < ApplicationController
     end
     if params[:category].present?
       @products = Product.where(available: true,product_category_id: params[:category])
+    elsif params[:search_product].present?
+      name = Product.arel_table[:name]
+      @products = Product.where(available: true).where(name.matches("%#{params[:search_product]}%"))
     else
       @products = Product.where(available: true)
     end
@@ -29,17 +32,12 @@ class HomeController < ApplicationController
       cart_item = @current_cart.cart_items.find_or_create_by(product: @product)
       cart_item.quantity += 1
       cart_item.save!
-      respond_to do |format|
-        format.js { flash.now[:notice] = "Here is my flash notice" }
-      end
-      # redirect_to root_path, notice: "Product successfully added to cart"
     else
-      # redirect_to root_path, notice: "Product could not be added to cart"
+      redirect_to root_path, notice: "Product could not be added to cart"
     end
   end
 
   def cart
-
   end
 
   def destroy_cart
