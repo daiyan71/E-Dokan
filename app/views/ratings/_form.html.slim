@@ -7,7 +7,12 @@
             .col-md-4
               label Rating
             .col-md-7
-              = f.range_field :rating, :in => 1..5, :step => '1', class: "rating"
+              span.fa.fa-star.fa-2x#star1
+              span.fa.fa-star.fa-2x#star2
+              span.fa.fa-star.fa-2x#star3
+              span.fa.fa-star.fa-2x#star4
+              span.fa.fa-star.fa-2x#star5
+              = f.hidden_field :rating, id: "rating_field"
     .row.pl-0
       .col-md-12
         fieldset.form-group

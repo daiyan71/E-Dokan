@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   include CurrentCart
-  before_action :set_current_cart, only: [:cart, :destroy_cart]
+  before_action :set_current_cart, only: [:cart, :destroy_cart, :increase_quantity]
 
   def index
     if session[:order_page] == true
@@ -27,11 +27,14 @@ class HomeController < ApplicationController
 
   def add_to_cart
     if params[:product_id].present?
-      set_current_cart
-      @product = Product.find(params[:product_id])
-      cart_item = @current_cart.cart_items.find_or_create_by(product: @product)
-      cart_item.quantity += 1
-      cart_item.save!
+      @quantity = params[:quantity].to_i
+      if @quantity > 0
+        set_current_cart
+        @product = Product.find(params[:product_id])
+        cart_item = @current_cart.cart_items.find_or_create_by(product: @product)
+        cart_item.quantity += @quantity
+        cart_item.save!
+      end
     else
       redirect_to root_path, notice: "Product could not be added to cart"
     end
