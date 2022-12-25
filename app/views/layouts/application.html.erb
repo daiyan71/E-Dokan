@@ -16,11 +16,9 @@
   <%else %>
     <%=render 'shared/nav_bar_user' %>
   <%end %>
-  <div class = "main">
+    <div class = "main">
+      <%= render "layouts/flash" %>
       <div class="container-fluid align-self-auto">
-        <div id="flash_div">
-          <%= render "layouts/flash" %>
-        </div>
         <div>
           <%= yield %>
         </div>
