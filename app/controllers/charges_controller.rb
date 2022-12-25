@@ -1,5 +1,6 @@
 class ChargesController < ApplicationController
   rescue_from Stripe::CardError, with: :catch_exception
+  before_action :check_general_user
   def new
   end
 

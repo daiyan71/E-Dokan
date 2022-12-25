@@ -1,4 +1,5 @@
 class RatingsController < ApplicationController
+  before_action :check_general_user
   def new
     unless params[:product_id].present?
       redirect_to root_path, alert: "Don't Have access!"

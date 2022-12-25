@@ -3,6 +3,7 @@ class OrdersController < ApplicationController
   before_action :verify_user_and_cart, only: [:new, :create]
   before_action :set_order, only: [:payment, :destroy, :show]
   before_action :check_user, only: [:index]
+  before_action :check_general_user
 
   def index
     @orders = current_user.orders.order(created_at: :desc)

@@ -1,19 +1,24 @@
 class HomeController < ApplicationController
   include CurrentCart
   before_action :set_current_cart, only: [:cart, :destroy_cart, :increase_quantity]
+  before_action :check_general_user
 
   def index
-    if session[:order_page] == true
-      session[:order_page] = nil
-      redirect_to cart_path
-    end
-    if params[:category].present?
-      @products = Product.where(available: true,product_category_id: params[:category])
-    elsif params[:search_product].present?
-      name = Product.arel_table[:name]
-      @products = Product.where(available: true).where(name.matches("%#{params[:search_product]}%"))
+    if current_user.present? && current_user.is_admin?
+      redirect_to admin_home_path
     else
-      @products = Product.where(available: true)
+      if session[:order_page] == true
+        session[:order_page] = nil
+        redirect_to cart_path
+      end
+      if params[:category].present?
+        @products = Product.where(available: true,product_category_id: params[:category])
+      elsif params[:search_product].present?
+        name = Product.arel_table[:name]
+        @products = Product.where(available: true).where(name.matches("%#{params[:search_product]}%"))
+      else
+        @products = Product.where(available: true)
+      end
     end
   end
 

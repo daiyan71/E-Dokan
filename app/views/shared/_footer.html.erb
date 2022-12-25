@@ -1,0 +1,99 @@
+<footer class="page-footer font-small black pt-4 bg-gray-500" style="clear: left; margin-top:-40px;">
+
+  <!-- Footer Links -->
+  <div class="container-fluid text-center text-md-left" style="padding: 0px 80px;">
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-3 mt-md-0 mt-3">
+
+
+        <h1 style="color: #081345; font-size: 27px; font-family:Carter One; margin-bottom: 30px;">E-dokan.com</h1>
+
+        <!-- Content -->
+        <h5 class="font-weight-bold text-uppercase mb-6"style="color: #081345;">Follow Us On</h5>
+
+        <!-- Facebook -->
+
+        <!-- Twitter -->
+        <a class="i fa fa-facebook fa-3x" href="https://www.facebook.com/daiyan.ibrahim71"></a>
+        <!-- Google +-->
+        <a class="i fa fa-twitter fa-3x" href="https://twitter.com/iamsrk?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"></a>
+        <!-- Dribbble -->
+        <a class="i fa fa-instagram fa-3x" href="https://www.instagram.com/Daiyan_ibrahim/?fbclid=IwAR21ockl3IzergeB2-jCtsggutY1JExVcy-gAPlMX4oCISuLCY11vLGB0YQ"></a>
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none pb-3">
+
+      <!-- Grid column -->
+      <div class="col-md-3 mb-md-0 mb-3">
+
+        <!-- Links -->
+        <h4 class="text-uppercase" style="color: #081345;">INFORMATION</h4>
+
+        <ul class="list-unstyled">
+          <li>
+            <%if current_user.present? %>
+              <a href="/user_profiles/<%=current_user.id %>" style="color: #212529;"><h5>Your Account</h5></a>
+            <%else %>
+              <a href="/users/sign_in" style="color: #212529;"><h5>Your Account</h5></a>
+            <%end %>
+          </li>
+          <li>
+            <a href="/" style="color: #212529;"><h5>Contact Us</h5></a>
+          </li>
+
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-3 mb-md-0 mb-3">
+
+        <!-- Links -->
+        <h4 class="text-uppercase" style="color: #081345;">ADDRESS</h4>
+
+        <ul class="list-unstyled" style="color: #212529;">
+          <li>
+            <h5>South Banasree,Khilgaon</br>Dhaka-1219</h5>
+          </li>
+          <li>
+            <h5>E-Dokan.com</h5>
+          </li>
+          <li>
+            <h5>EDokan@gmail.com</h5>
+          </li>
+          <li>
+            <h5>+880 1787141384</h5>
+          </li>
+
+        </ul>
+
+      </div>
+
+
+      <div class="col-md-3 mb-md-0 mb-3">
+
+        <!-- Links -->
+        <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d2171.4002495468526!2d90.43933223149665!3d23.752892864839605!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1ssouth%20banasree!5e0!3m2!1sen!2sbd!4v1570734533674!5m2!1sen!2sbd" width="100%" height="200px" frameborder="0" style="border:0; box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0); color: #080832;" allowfullscreen=""></iframe>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3" style="color: white;">© 2023 Copyright:
+    <a href="/"style="color: white;"> <span>EDokan.com</span></a>
+  </div>
+  <!-- Copyright -->
+</footer>

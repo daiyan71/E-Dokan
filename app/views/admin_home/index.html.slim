@@ -1,0 +1,56 @@
+header.bg-gray-500.py-5
+  .container.px-4.px-lg-5.my-5
+    .text-center.text-white
+      h1.display-4.fw-bolder
+        | Welcome to Admin Panel
+      p.lead.fw-normal.text-white-50.mb-0
+        = current_user&.user_name
+-product =  Product.first
+section.py-5
+  .container
+    .row
+      .col.m-5
+        .card.p-2.bg-gray-light
+          .card-body.p-4.bg-gray-200
+            .text-center
+              h5.fw-bolder.text-dark
+                = "PRODUCT  CATEGORIES"
+              .d-flex.justify-content-center.small.text-dark.mb-2
+                = "Total Category: #{@category_count}"
+              .d-flex.justify-content-center.small.text-dark.mb-2
+                = " "
+              .card-footer.p-4.pt-0.border-top-0.bg-transparent
+                .text-center
+                  = link_to product_categories_path, class: "add-to-cart btn btn-default"
+                    i.fa.fa-manage
+                    span Manage
+      .col.m-5
+        .card.p-2.bg-gray-light
+          .card-body.p-4.bg-gray-200
+            .text-center
+              h5.fw-bolder.text-dark
+                = "PRODUCTS"
+              .d-flex.justify-content-center.small.text-dark.mb-2
+                = "Total Products: #{@product_count}"
+              .d-flex.justify-content-center.small.text-dark.mb-2
+                = "In Stock: #{@product_count_available}"
+              .card-footer.p-4.pt-0.border-top-0.bg-transparent
+                .text-center
+                  = link_to products_path, class: "add-to-cart btn btn-default"
+                    i.fa.fa-manage
+                    span Manage
+      .col.m-5
+        .card.p-2.bg-gray-light
+          .card-body.p-4.bg-gray-200
+            .text-center
+              h5.fw-bolder.text-dark
+                = "Order"
+              .d-flex.justify-content-center.small.text-dark.mb-2
+                = "Total Order: #{@order_count}"
+              .d-flex.justify-content-center.small.text-dark.mb-2
+                = " "
+              .card-footer.p-4.pt-0.border-top-0.bg-transparent
+                .text-center
+                  = link_to orders_path, class: "add-to-cart btn btn-default"
+                    i.fa.fa-manage
+                    span Manage

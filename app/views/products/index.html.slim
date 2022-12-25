@@ -1,4 +1,4 @@
-card#list
+card#form
   .card-header
     .head
       span.header-text = 'Products'
@@ -6,7 +6,10 @@ card#list
   .card.m-0
     .card-body.p-0
       .filter-section
-
+        = link_to new_product_path, class: "button btn btn-sm btn-primary text-white"
+          i.fa.fa-plus.mr-2 role='status'
+          span.spinner-border.spinner-border-sm.mr-2.d-none aria-hidden="true" role="status"
+          span Add new
       .show-list
         - unless @products.present?
           .m-2.text-center = "There is no item"
@@ -23,7 +26,6 @@ card#list
                   th
                   th
                   th
-
               tbody
                 - @products.each do |product|
                   tr.shadow-style.clickable-row
@@ -37,8 +39,3 @@ card#list
                     td = link_to 'Destroy', product, data: { confirm: 'Are you sure?' }, method: :delete
 
             br
-
-            = link_to new_product_path, class:"button btn btn-sm btn-primary"
-              i.fa.fa-plus.mr-2 role='status'
-              span.spinner-border.spinner-border-sm.mr-2.d-none aria-hidden="true" role="status"
-              span Add new

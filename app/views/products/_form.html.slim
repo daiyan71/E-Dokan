@@ -1,6 +1,6 @@
-.card
+.card#forms
   - if @product.errors.any?
-    .card-header.ul-padding-left
+    .card-header.ul-padding-left.bg-danger
       = f.error_notification.html_safe
       ul.alert.alert-danger
         - @product.errors.full_messages.each do |message|
@@ -14,7 +14,8 @@
               label Product Category
               span.req-field title="required" *
             .col-md-7
-              = f.collection_select :product_category_id, ProductCategory.all, :id, :category_name, class: "form-control form-control-sm"
+              = f.collection_select :product_category_id, ProductCategory.all, :id, :category_name,{:prompt=>true},
+                      class: 'form-control form-control-sm'
 
         fieldset.form-group
           .row
@@ -22,14 +23,14 @@
               label Available
               span.req-field title="required" *
             .col-md-7
-              = f.check_box :available
+              = f.check_box :available, class: "check-box"
         fieldset.form-group
           .row
             .col-md-4
               label Name
               span.req-field title="required" *
             .col-md-7
-              = f.text_field :name
+              = f.text_field :name, class: "form-control form-control-sm"
     .row.pl-0
       .col-md-12
         fieldset.form-group
@@ -45,14 +46,14 @@
               label Quantity
               span.req-field title="required" *
             .col-md-7
-              = f.text_field :quantity
+              = f.text_field :quantity, class: "form-control form-control-sm"
         fieldset.form-group
           .row
             .col-md-4
-              label Price
+              label Price(In Cents)
               span.req-field title="required" *
             .col-md-7
-              = f.text_field :price
+              = f.text_field :price, class: "form-control form-control-sm"
     .row.pl-0
       .col-md-12
         fieldset.form-group
@@ -61,7 +62,7 @@
               label Description
               span.req-field title="required" *
             .col-md-7
-              = f.text_area :description
+              = f.text_area :description, class: "form-control form-control-sm"
     = button_tag type: 'submit', class: 'button btn btn-sm btn-primary submit-button'
       i class = " #{ @product.persisted? ? 'icon-arrow-up-circle' : 'icon-doc'} icons mt-0 mr-2" role="status"
       span.spinner-border.spinner-border-sm.mr-2.d-none aria-hidden="true" role="status"

@@ -1,24 +1,29 @@
-p#notice = notice
-
-p
-  strong Product category:
-  = @product.product_category.category_name
-p
-  strong Available:
-  = @product.available
-p
-  strong Name:
-  = @product.name
-p
-  strong Image:
-  = @product.image
-p
-  strong Price:
-  = @product.price
-p
-  strong Description:
-  = @product.description
-
-=> link_to 'Edit', edit_product_path(@product)
-'|
-=< link_to 'Back', products_path
+.container.bg-gray-300
+  .card.bg-gray-100
+    .container-fliud
+      .wrapper.row
+        .preview.col-md-6
+          .preview-pic.tab-content
+            #pic-1.tab-pane-active
+              = image_tag @product.image.url
+        .details.col-md-6
+          h3.product-title
+            = @product.name
+          .rating
+            .stars
+              - rating = @product.current_rating.to_i
+              - rating.times do
+                span.fa.fa-star.checked
+              - (5 - rating).times do
+                span.fa.fa-star
+            span.review-no = link_to "#{pluralize @product.rating_count, 'review', 'reviews'}", product_reviews_path(product_id: @product.id), method: :get
+          p.product-description
+            = @product.description
+          h4.price
+            | current price:
+            span
+              = show_price @product.price
+          .action
+            = link_to edit_product_path, class: "add-to-cart btn btn-default"
+              i.fa.fa-pencil
+              span Edit

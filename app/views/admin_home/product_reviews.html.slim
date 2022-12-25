@@ -1,0 +1,28 @@
+card#form
+  .card-header
+    .head
+      span.card-header-actions
+  .card.m-0
+    .card-body.p-0
+      .filter-section
+
+      .show-list
+        .text-center
+          = "Rating of "
+          = link_to "#{@product.name}", @product
+        - if @ratings.empty?
+          .m-2.text-center No Rating for this product
+          .m-2.text-center = link_to "Back to Product", product_details_path(@product), method: :get
+        - else
+          .text-center
+            - @ratings.each do |rating|
+              h3 = link_to rating.user.user_name, user_profile_path(rating.user)
+              .rating
+                .stars
+                  - rat = rating.rating.to_i
+                  - rat.times do
+                    span.fa.fa-star.checked
+                  - (5 - rat).times do
+                    span.fa.fa-star
+              p = "Description:"
+              = text_area_tag '', "#{rating.message}",cols: "50",  disabled: true
