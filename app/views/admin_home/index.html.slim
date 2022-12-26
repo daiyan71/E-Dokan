@@ -48,9 +48,9 @@ section.py-5
               .d-flex.justify-content-center.small.text-dark.mb-2
                 = "Total Order: #{@order_count}"
               .d-flex.justify-content-center.small.text-dark.mb-2
-                = " "
+                = "To Be Completed: #{@to_be_completed_order_count}"
               .card-footer.p-4.pt-0.border-top-0.bg-transparent
                 .text-center
-                  = link_to orders_path, class: "add-to-cart btn btn-default"
+                  = link_to manage_orders_path, class: "add-to-cart btn btn-default"
                     i.fa.fa-manage
                     span Manage

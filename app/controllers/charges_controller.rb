@@ -6,8 +6,7 @@ class ChargesController < ApplicationController
 
   def create
     StripeChargesServices.new(charges_params, current_user).call
-    path = Order.find(params[:order_id]).receipt_url
-    redirect_to orders_path
+    redirect_to orders_path, notice: "Payment Process Completed"
   end
 
   private

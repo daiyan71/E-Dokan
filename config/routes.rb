@@ -23,6 +23,9 @@ Rails.application.routes.draw do
   controller :admin_home do
     get :admin_home, to: 'admin_home#index'
     get :product_reviews
+    get :manage_orders
+    get :order_details
+    get :set_order_status
   end
 
   root to: "home#index"

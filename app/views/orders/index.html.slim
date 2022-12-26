@@ -12,14 +12,14 @@ card#form
           .m-2.text-center = "There is no item"
         - else
           .table-responsive
-            table.table.table-sm#dataTable_no_ajax_with_number
+            table.table.table-sm
               thead
                 tr.text-center
                   th Sl
                   th Order Number
                   th Order Date
-                  th Address
                   th Total Amount
+                  th Order Status
                   th Payment Status
                   th Receipt
                   th.text-center Action
@@ -30,16 +30,20 @@ card#form
                     td = idx+1
                     td = link_to order.order_number, order
                     td = order.created_at
-                    td = order.address
                     td = number_to_currency order.total_amount
+                    td = order.order_status
                     td = order.payment_status
                     - unless order.receipt_url.nil?
                       td = link_to "View Receipt", order.receipt_url
                     - else
                       td
-                    - if order.Unpaid?
+                    - if order.Unpaid? && !order.Canceled?
                       td.d-flex
-                        = link_to "Cancel", order, method: :delete, class: "button btn btn-sm btn secondary"
-                        = link_to "Pay Now", payment_order_path(order), class: "button btn btn-sm btn secondary"
+                        = link_to order, method: :delete,data: { confirm: 'Are you sure you want to cancel the order?'}, class: "btn btn-danger btn-sm text-white p-2 mr-1 "
+                          i.fa.fa-close
+                          span Cancel
+                        = link_to payment_order_path(order), class: "btn btn-success btn-sm text-dark p-2 mr-1 "
+                          i.fa.fa-check
+                          span Pay Now
                     - else
                       td

@@ -7,6 +7,9 @@ card#form
     .card-body.p-0
       .filter-section.ml-3.p-1
         h3 = @order.order_number
+        .d-flex
+          h4 = "Customer: "
+          h4 = link_to @order.user.user_name, user_profile_path(@order.user)
         h5 = " Order Date: #{@order.created_at}"
         h5 = " Address: #{@order.address}"
         h5 = " Total: #{show_price @order.total_amount}"
@@ -17,13 +20,15 @@ card#form
             h5 = " Payment Receipt: "
             h5 = link_to "Receipt", @order.receipt_url
         - if @order.Unpaid? && !@order.Canceled?
-          .d-flex
-            = link_to @order, method: :delete,data: { confirm: 'Are you sure you want to cancel the order?'}, class: "btn btn-danger btn-sm text-white p-2 mr-1 "
+          h5
+            = link_to set_order_status_path(order_id: @order, status: Order::CANCELED), data: { confirm: 'Are you sure you want to cancel the order?'}, class: "btn btn-danger btn-sm text-white p-2 mr-1 "
               i.fa.fa-close
               span Cancel
-            = link_to payment_order_path(@order), class: "btn btn-success btn-sm text-dark p-2 mr-1 "
+        - elsif !@order.Completed? && !@order.Canceled?
+          h5
+            = link_to set_order_status_path(order_id: @order, status: Order::COMPLETED), data: { confirm: 'Are you sure you want to mark the order as completed?'},class: "btn btn-success btn-sm text-dark p-2 mr-1 "
               i.fa.fa-check
-              span Pay Now
+              span Mark As Completed
       h2.ml-2 = " Ordered Items"
       .show-list
         .table-responsive
@@ -51,12 +56,12 @@ card#form
               tr.text-center
                 h3
                   = "Total Price: #{show_price total_price}"
-                - if @order.Unpaid?
+                - if @order.Unpaid? && !@order.Canceled?
                   = link_to @order, method: :delete, class:"m-2 button btn btn-sm btn-danger text-white"
                     i.fa.fa-close.mr-2 role='status'
                     span.spinner-border.spinner-border-sm.mr-2.d-none aria-hidden="true" role="status"
                     span Cancel Order
-                = link_to orders_path, class: "m-2 button btn btn-sm btn-info text-white"
+                = link_to manage_orders_path, class: "m-2 button btn btn-sm btn-info text-white"
                   i.fa.fa-backward.mr-2 role='status'
                   span.spinner-border.spinner-border-sm.mr-2.d-none aria-hidden="true" role="status"
                   span Back

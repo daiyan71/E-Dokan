@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  add_flash_types :info
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
@@ -10,7 +11,8 @@ class ApplicationController < ActionController::Base
 
   def check_general_user
     if current_user.present? && current_user.is_admin?
-      redirect_to admin_home_path, alert: "This site is for general user"
+      flash[:error] = "This page is only for general user"
+      redirect_to admin_home_path
     end
   end
 end

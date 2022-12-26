@@ -2,13 +2,16 @@ class HomeController < ApplicationController
   include CurrentCart
   before_action :set_current_cart, only: [:cart, :destroy_cart, :increase_quantity]
   before_action :check_general_user
+  skip_before_action :check_general_user, only: [:index]
 
   def index
     if current_user.present? && current_user.is_admin?
+      flash[:info] = "Welcome to Admin Panel #{current_user.user_name}"
       redirect_to admin_home_path
     else
       if session[:order_page] == true
         session[:order_page] = nil
+        flash[:info] = "Place Order Now"
         redirect_to cart_path
       end
       if params[:category].present?
@@ -26,7 +29,8 @@ class HomeController < ApplicationController
     if params[:product_id].present?
       @product = Product.find(params[:product_id])
     else
-      redirect_to root_path, notice: "No product selected"
+      flash[:error] = "No product selected"
+      redirect_to root_path
     end
   end
 
@@ -41,7 +45,8 @@ class HomeController < ApplicationController
         cart_item.save!
       end
     else
-      redirect_to root_path, notice: "Product could not be added to cart"
+      flash[:error] = "Product could not be added to cart"
+      redirect_to root_path
     end
   end
 
@@ -51,9 +56,11 @@ class HomeController < ApplicationController
   def destroy_cart
     if @current_cart.destroy!
       session[:cart_id] = nil
-      redirect_to root_path, notice: "Cart is empty now!"
+      flash[:info] = "Cart is empty now!"
+      redirect_to root_path
     else
-      redirect_to root_path, notice: "Could not empty the cart!"
+      flash[:error] = "Could not empty the cart!"
+      redirect_to root_path
     end
   end
 
@@ -62,7 +69,8 @@ class HomeController < ApplicationController
     if cart_item.destroy!
       redirect_to cart_path, notice: "Item removed from cart"
     else
-      redirect_to cart_path, notice: "Item could not be removed from cart"
+      flash[:error] = "Item could not be removed from cart"
+      redirect_to cart_path
     end
   end
 

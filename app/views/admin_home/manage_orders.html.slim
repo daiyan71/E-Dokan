@@ -1,0 +1,48 @@
+card#form
+  .card-header
+    .head
+      span.header-text = 'Your Orders'
+      span.card-header-actions
+  .card.m-0
+    .card-body.p-0
+      .filter-section
+
+      .show-list
+        - unless @orders.present?
+          .m-2.text-center = "No Orders"
+        - else
+          .table-responsive
+            table.table.table-sm
+              thead
+                tr.text-center
+                  th Sl
+                  th Order Number
+                  th Order Date
+                  th Customer
+                  th Address
+                  th Total Amount
+                  th Payment Status
+                  th Order Status
+                  th.text-center Action
+
+              tbody
+                - @orders.each_with_index do |order, idx|
+                  tr.shadow-style.clickable-row
+                    td = idx+1
+                    td = link_to order.order_number, order_details_path(order_id: order.id)
+                    td = order.created_at
+                    td = link_to order.user.user_name, user_profile_path(order.user)
+                    td = order.address
+                    td = number_to_currency order.total_amount
+                    td = order.payment_status
+                    td = order.order_status
+                    - if order.Unpaid? && !order.Canceled?
+                      td.text-center
+                        = link_to set_order_status_path(order_id: order, status: Order::CANCELED),data: { confirm: 'Are you sure you want to cancel the order?'}, class: "btn btn-danger btn-sm text-white p-2 mr-1 "
+                          i.fa.fa-close
+                          span Cancel
+                    - elsif !order.Completed? && !order.Canceled?
+                      td.text-center = link_to set_order_status_path(order_id: order, status: Order::COMPLETED), data: { confirm: 'Are you sure you want to mark the order as completed?'}, class: "btn btn-success btn-sm text-dark p-2 mr-1 "
+                        i.fa.fa-check
+                        span Mark As Completed
+

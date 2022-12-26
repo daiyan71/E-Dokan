@@ -48,7 +48,7 @@ class OrdersController < ApplicationController
 
   def payment
     unless @order.Unpaid?
-      redirect_to orders_path, alert: "Payment Process Completed"
+      redirect_to orders_path, alert: "Payment Process already Completed"
     end
   end
 
@@ -75,16 +75,17 @@ class OrdersController < ApplicationController
   def verify_user_and_cart
     get_current_cart
     if @current_cart.nil?
-      redirect_to root_path, notice: "Empty Cart"
+      redirect_to root_path, alert: "Empty Cart"
     end
     unless current_user.present?
       session[:order_page] = true
-      redirect_to new_user_session_path, notice: "Sign in first"
+      redirect_to new_user_session_path, alert: "Sign in first"
     end
   end
   def check_user
     unless current_user.present?
-      redirect_to root_path, alert: "You Don't have access!"
+      flash[:error] = "You Don't have access!"
+      redirect_to root_path
     end
   end
 end
