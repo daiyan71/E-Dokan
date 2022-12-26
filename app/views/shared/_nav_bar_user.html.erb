@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="height: auto">
   <a class="navbar-brand" href="/">E-Dokan</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -28,18 +28,25 @@
         <%end %>
       </li>
     </ul>
-    <form action="/" class="ml-5 form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" name="search_product" type="search" placeholder="Search product" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      <li class="nav-item form-inline active">
-        <%if current_user.present? %>
-          <%= link_to current_user.user_name, user_profile_path(current_user)%>
-          <%=link_to "Sign out", destroy_user_session_path, method: :delete, class: "nav-link i fa fa-sign-out mr-1 "%>
-        <%else %>
-          <%=link_to "Sign in", new_user_session_path, class: "nav-link i fa fa-sign-inn mr-1 "%>
-        <%end %>
-      </li>
-    </form>
-
   </div>
+  <form action="/" class="ml-5 form-inline">
+    <input class="form-control mr-sm-2" name="search_product" type="search" placeholder="Search product" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+
+  <ul class="navbar-nav mr-auto">
+    <%if current_user.present? %>
+      <li class="nav-item">
+        <%= link_to current_user.user_name, user_profile_path(current_user), class: "btn btn-info text-dark p-0 fa fa-user-circle-o mr-1 "%>
+      </li>
+      <li class="nav-item">
+        <%=link_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-danger text-white p-0 i fa fa-sign-out mr-1 "%>
+      </li>
+    <%else %>
+      <li class="nav-item">
+        <%=link_to "Sign in", new_user_session_path, class: "nav-link p-0 fa fa-sign-inn mr-1 "%>
+      </li>
+    <%end %>
+  </ul>
+
 </nav>

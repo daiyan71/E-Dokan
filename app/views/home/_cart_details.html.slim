@@ -1,17 +1,33 @@
-table-responsive
-  table.table.table-sm.text-center
-    thead
-    tbody
-      tr.text-center.font-weight-bold.mr-2
-        td.text-center.font-weight-bold.mr-2 colspan="2" 1 Item is added to your cart!
-      tr.text-center
-        td.font-weight-bold.mr-2 = "Item Name: "
-        td = @product.name
-      tr.text-center
-        td.font-weight-bold.mr-2 = "Item Price: "
-        td = show_price @product.price
-      tr.text-center
-        td colspan = "2"
-          = link_to cart_path, class: "button btn btn-md"
-            i.fa.fa-shopping-cart
-            span View Cart
+- if @quantity > 0
+  table-responsive
+    table.table.table-sm.text-center
+      thead
+      tbody
+        tr.text-center.font-weight-bold.mr-2
+          td.text-center.font-weight-bold.mr-2 colspan="2" = "1 Item is added to your cart!"
+        tr.text-center
+          td.font-weight-bold.mr-2 = "Item Name: "
+          td = @product.name
+        tr.text-center
+          td.font-weight-bold.mr-2 = "Quantity: "
+          td = @quantity
+        tr.text-center
+          td.font-weight-bold.mr-2 = "Item Price: "
+          td = show_price @product.price
+        tr.text-center
+          td colspan = "2"
+            = link_to cart_path, class: "button btn btn-md"
+              i.fa.fa-shopping-cart
+              span View Cart
+- else
+  table-responsive
+    table.table.table-sm.text-center
+      thead
+      tbody
+        tr.text-center.font-weight-bold.mr-2
+          td.text-center.font-weight-bold.mr-2 colspan="2" = "Could Not add to cart! Quantity must be greater than 0"
+        tr.text-center
+          td colspan = "2"
+            = link_to cart_path, class: "button btn btn-md"
+              i.fa.fa-shopping-cart
+              span View Cart

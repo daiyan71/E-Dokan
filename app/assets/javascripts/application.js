@@ -17,6 +17,7 @@
 //= require jquery
 //= require bootstrap.min
 //= require toastr
+//= require home.js
 
 
 $(document).ready(function(){

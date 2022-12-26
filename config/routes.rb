@@ -20,5 +20,10 @@ Rails.application.routes.draw do
     delete :destroy_cart_item
   end
 
+  controller :admin_home do
+    get :admin_home, to: 'admin_home#index'
+    get :product_reviews
+  end
+
   root to: "home#index"
 end

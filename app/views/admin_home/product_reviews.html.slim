@@ -9,13 +9,7 @@ card#form
       .show-list
         .text-center
           = "Rating of "
-          = link_to "#{@product.name}", product_details_path(product_id: @product), method: :get
-        - if current_user.present?
-          = simple_form_for @rating, html: {class: 'form rating_form'} do |f|
-            = render partial: 'form', locals: {f: f}
-        - else
-          .m-2.text-center Sign in to Rate
-          .m-2.text-center = link_to "Sign In", new_user_session_path
+          = link_to "#{@product.name}", @product
         - if @ratings.empty?
           .m-2.text-center No Rating for this product
           .m-2.text-center = link_to "Back to Product", product_details_path(@product), method: :get

@@ -18,19 +18,19 @@ card#form
               thead
                 tr.text-center
                   th Product Name
-                  th Quantity
+                  th.text-center Quantity
                   th Unit Price
                   th Total Price
-                  th Action
+                  th.text-center Action
 
               tbody
                 - total_price = 0
                 - @current_cart.cart_items.each do |item|
                   tr.shadow-style.clickable-row
-                    td = link_to item.product.name, product_details_path(product_id: item.product)
-                    td = item.quantity
-                    td = item.product.price
-                    td = item.product.price * item.quantity
+                    td = link_to item.product.name, product_details_path(product_id: item.product), method: :get
+                    td.text-center = item.quantity
+                    td = show_price item.product.price
+                    td = show_price item.product.price * item.quantity
                     - total_price +=  (item.product.price * item.quantity)
                     td.text-center
                       = link_to destroy_cart_item_path(cart_item_id: item), method: :delete
@@ -41,7 +41,7 @@ card#form
               thead
                 tr.text-center
                   h3
-                    = "Total Price: #{total_price}"
+                    = "Total Price: #{show_price total_price}"
                   = link_to destroy_cart_path, method: :delete, class:"m-2 button btn btn-sm btn-danger text-white"
                     i.fa.fa-trash.mr-2 role='status'
                     span.spinner-border.spinner-border-sm.mr-2.d-none aria-hidden="true" role="status"

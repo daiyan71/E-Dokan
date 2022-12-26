@@ -21,7 +21,7 @@ card#form
               - total_price = 0
               - @order.order_items.each do |item|
                 tr.shadow-style.clickable-row
-                  td = link_to item.product.name, product_details_path(product_id: item.product)
+                  td = link_to item.product.name, product_details_path(product_id: item.product), method: :get
                   td = item.quantity
                   td = item.product.price
                   td = item.product.price * item.quantity
