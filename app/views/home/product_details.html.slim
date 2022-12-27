@@ -33,4 +33,8 @@
               = button_tag type: 'submit', class: "add-to-cart btn btn-default"
                 i.fa.fa-shopping-cart
                 span Add to cart
+              = link_to :back, method: :get, class: 'button btn btn-sm btn-info ml-2 text-white'
+                i class = "icon-doc icons fa fa-backward mt-0 mr-2" role="status"
+                span.spinner-border.spinner-border-sm.mr-2.d-none aria-hidden="true" role="status"
+                span = 'Back'
 = render 'added_to_cart_modal'

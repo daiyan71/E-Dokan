@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_26_193513) do
+ActiveRecord::Schema.define(version: 2022_12_27_203711) do
 
   create_table "cart_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.bigint "cart_id"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 2022_12_26_193513) do
     t.datetime "updated_at", null: false
     t.decimal "current_rating", precision: 10, scale: 5
     t.integer "rating_count"
+    t.boolean "featured", default: false
     t.index ["product_category_id"], name: "index_products_on_product_category_id"
   end
 

@@ -1,0 +1,42 @@
+section.py-5
+  .container.bg-gray-200
+    .row
+      .col-md-4
+      .col-md-4
+        .card
+          .card-body
+            .d-flex.flex-column.align-items-center.text-center
+              - if @user.image.present?
+                = image_tag @user.image.url, class: "rounded-circle", style: "width:200px; height:200px"
+              .mt-3
+                h4 = @user.user_name
+                - if current_user.present? && @user == current_user
+                  = link_to "Signout", destroy_user_session_path, method: :delete, class: "btn btn-danger text-white i fa fa-sign-out", style: "margin:5px"
+                  = link_to "Edit", edit_user_registration_path , class:"btn btn-info i fa fa-pencil ml-2 mr-2"
+                = link_to "Back", :back , class:"btn btn-secondary text-dark i fa fa-backward", style:"margin:5px"
+    .row
+      .col-3
+      .col-md-6
+        .card.mb-3
+          .card-body
+            .row
+              .col-sm-3
+                h6.mb-0
+                  | Full Name
+              .col-sm-9
+                =@user.user_name
+            hr
+            .row
+              .col-sm-3
+                h6.mb-0
+                  | Email
+              .col-sm-9
+                =@user.email
+            hr
+            - if current_user.present? && current_user == @user
+              .row
+                .col-sm-3
+                  h6.mb-0
+                    | Contact No
+                .col-sm-9
+                  = @user.contact_number
