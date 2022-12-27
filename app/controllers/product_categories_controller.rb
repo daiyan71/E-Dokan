@@ -1,4 +1,5 @@
 class ProductCategoriesController < ApplicationController
+  before_action :authenticate_user!
   before_action :check_permission
   before_action :set_product_category, only: %i[ show edit update destroy ]
 

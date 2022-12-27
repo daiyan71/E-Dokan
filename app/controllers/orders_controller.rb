@@ -2,8 +2,8 @@ class OrdersController < ApplicationController
   include CurrentCart
   before_action :verify_user_and_cart, only: [:new, :create]
   before_action :set_order, only: [:payment, :destroy, :show]
-  before_action :check_user, only: [:index]
   before_action :check_general_user
+  before_action :authenticate_user!
 
   def index
     @orders = current_user.orders.order(created_at: :desc)
@@ -76,16 +76,6 @@ class OrdersController < ApplicationController
     get_current_cart
     if @current_cart.nil?
       redirect_to root_path, alert: "Empty Cart"
-    end
-    unless current_user.present?
-      session[:order_page] = true
-      redirect_to new_user_session_path, alert: "Sign in first"
-    end
-  end
-  def check_user
-    unless current_user.present?
-      flash[:error] = "You Don't have access!"
-      redirect_to root_path
     end
   end
 end

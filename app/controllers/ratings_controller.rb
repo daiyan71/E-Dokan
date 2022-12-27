@@ -1,4 +1,5 @@
 class RatingsController < ApplicationController
+  before_action :authenticate_user!, only: [:create, :update]
   before_action :check_general_user
   def new
     unless params[:product_id].present?

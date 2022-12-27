@@ -1,6 +1,7 @@
 class AdminHomeController < ApplicationController
-
   before_action :set_order, only: [:set_order_status, :order_details]
+  before_action :authenticate_user!
+  before_action :admin_check
   def index
     @category_count = ProductCategory.count
     @product_count_available = Product.where(available: true).count
@@ -38,5 +39,12 @@ class AdminHomeController < ApplicationController
 
   def set_order
     @order = Order.find(params[:order_id])
+  end
+
+  def admin_check
+    unless current_user&.is_admin?
+      flash[:error] = "You don't have the permission"
+      redirect_to root_path
+    end
   end
 end
