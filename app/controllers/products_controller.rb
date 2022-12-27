@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_user!
   before_action :check_permission
   before_action :set_product, only: %i[ show edit update destroy ]
 
@@ -72,7 +73,8 @@ class ProductsController < ApplicationController
     end
   def check_permission
     unless current_user&.is_admin?
-      redirect_to root_path, notice: "You don't have the permission"
+      flash[:error] = "You don't have the permission"
+      redirect_to root_path
     end
   end
 end

@@ -1,8 +1,10 @@
 class RatingsController < ApplicationController
+  before_action :authenticate_user!, only: [:create, :update]
   before_action :check_general_user
   def new
     unless params[:product_id].present?
-      redirect_to root_path, alert: "Don't Have access!"
+      flash[:error] = "You Don't have access!"
+      redirect_to root_path
     else
       @product = Product.find(params[:product_id])
       @ratings = @product.ratings
@@ -23,7 +25,8 @@ class RatingsController < ApplicationController
     if @rating.save
       redirect_to new_rating_path(product_id: @rating.product_id), notice: "Rating Successfull"
     else
-      redirect_to new_rating_path(product_id: @rating.product_id), alert: "failed"
+      flash[:error] = "Failed!"
+      redirect_to new_rating_path(product_id: @rating.product_id)
     end
   end
 
@@ -33,7 +36,8 @@ class RatingsController < ApplicationController
     if @rating.update(rating_params)
       redirect_to new_rating_path(product_id: @rating.product_id), notice: "Rating Updated"
     else
-      redirect_to new_rating_path(product_id: @rating.product_id), alert: "failed"
+      flash[:error] = "Failed"
+      redirect_to new_rating_path(product_id: @rating.product_id)
     end
   end
 

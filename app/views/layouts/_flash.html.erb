@@ -3,6 +3,7 @@
     <%tp = 'success' if type == 'notice' %>
     <%tp = 'warning' if type == 'alert' %>
     <%tp = 'error' if type == 'error' %>
+    <%tp = 'info' if type == 'info' %>
     <script>toastr.<%=tp%>('<%=message %>')</script>
   <% end %>
 </div>

@@ -1,5 +1,3 @@
-h1 New product_category
-
-== render 'form'
-
-= link_to 'Back', product_categories_path
+= simple_form_for @product_category, html: {class: 'form'} do |f|
+  h5.header-text = 'New Product Category'
+  = render partial: 'form', locals: {f: f}

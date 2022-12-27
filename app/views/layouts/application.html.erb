@@ -24,6 +24,8 @@
         </div>
       </div>
     </div>
-    <%= render "shared/footer" %>
+    <% unless current_user&.is_admin? %>
+      <%= render "shared/footer" %>
+    <%end %>
   </body>
 </html>

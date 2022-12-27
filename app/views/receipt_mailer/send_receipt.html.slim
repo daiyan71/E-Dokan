@@ -1,0 +1,31 @@
+card#form
+  .card-header
+    .head
+      span.header-text = 'Order Details'
+      span.card-header-actions
+  .card.m-0
+    .card-body.p-0
+      .filter-section.ml-3.p-1
+        h3 = link_to @order.order_number, @order
+        h5 = " Order Date: #{@order.created_at}"
+        h5 = " Address: #{@order.address}"
+        h5 = " Total: #{number_to_currency @order.total_amount/100}"
+        h5 = " Payment Status: #{@order.payment_status}"
+
+      h2.ml-2 = " Ordered Items"
+      .show-list
+        .table-responsive
+          table.table.table-sm
+            thead
+              tr.text-center
+                th Product Name
+                th Quantity
+                th Unit Price
+                th Total Price
+            tbody
+              - @order.order_items.each do |item|
+                tr.shadow-style.clickable-row
+                  td = item.product.name
+                  td = item.quantity
+                  td = number_to_currency item.product.price/100
+                  td = number_to_currency (item.product.price * item.quantity)/100
