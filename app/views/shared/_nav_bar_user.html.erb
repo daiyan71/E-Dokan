@@ -15,9 +15,12 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <%ProductCategory.all.each do |category| %>
-            <a class="dropdown-item" href="/?category=<%=category.id%>"><%=category.category_name%></a>
+            <a class="dropdown-item" href="/all_products?category=<%=category.id%>"><%=category.category_name%></a>
           <%end %>
         </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link i fa fa-list-alt" href="/all_products">All Products</a>
       </li>
       <li class="nav-item">
         <a class="nav-link i fa fa-shopping-cart" href="/cart">Cart</a>
@@ -29,7 +32,7 @@
       </li>
     </ul>
   </div>
-  <form action="/" class="ml-5 form-inline">
+  <form action="/all_products" class="ml-5 form-inline">
     <input class="form-control mr-sm-2" name="search_product" type="search" placeholder="Search product" aria-label="Search">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
   </form>
@@ -37,10 +40,10 @@
   <ul class="navbar-nav mr-auto">
     <%if current_user.present? %>
       <li class="nav-item">
-        <%= link_to current_user.user_name, user_profile_path(current_user), class: "btn btn-info text-dark p-0 fa fa-user-circle-o mr-1 "%>
+        <%= link_to current_user.user_name, user_profile_path(current_user), class: "btn btn-info text-dark p-1 fa fa-user-circle-o mr-1 "%>
       </li>
       <li class="nav-item">
-        <%=link_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-danger text-white p-0 i fa fa-sign-out mr-1 "%>
+        <%=link_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-danger text-white p-1 i fa fa-sign-out mr-1 "%>
       </li>
     <%else %>
       <li class="nav-item">

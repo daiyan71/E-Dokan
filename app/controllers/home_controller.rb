@@ -2,26 +2,52 @@ class HomeController < ApplicationController
   include CurrentCart
   before_action :set_current_cart, only: [:cart, :destroy_cart, :increase_quantity]
   before_action :check_general_user
-  skip_before_action :check_general_user, only: [:index]
+  skip_before_action :check_general_user, only: [:index, :all_products]
 
   def index
     if current_user.present? && current_user.is_admin?
       flash[:info] = "Welcome to Admin Panel #{current_user.user_name}"
       redirect_to admin_home_path
     else
-      if session[:order_page] == true
-        session[:order_page] = nil
-        flash[:info] = "Place Order Now"
-        redirect_to cart_path
+      @featured_products = Product.where(available: true, featured: true).limit(8)
+      @top_rated_products = Product.where(available: true).order(current_rating: :desc).limit(8)
+      sql = "select product_id, count(product_id) from order_items group by product_id order by count(product_id) desc"
+      popular_product_ids = OrderItem.find_by_sql(sql).pluck(:product_id)
+      @popular_products = Product.where(available: true, id: popular_product_ids).limit(8)
+      @products = Product.where(available: true)
+    end
+  end
+
+  def all_products
+    if params[:category].present?
+      @products = Product.where(available: true,product_category_id: params[:category])
+    elsif params[:search_product].present?
+      name = Product.arel_table[:name]
+      @products = Product.where(available: true).where(name.matches("%#{params[:search_product]}%"))
+    elsif params[:filter].present?
+      filter = params[:filter]
+      session[:filter] = {}
+      @products = Product.where(available: true)
+      unless filter[:category] == ''
+        session[:filter]['category'] = filter[:category]
+        @products = @products.where(product_category_id: filter[:category])
       end
-      if params[:category].present?
-        @products = Product.where(available: true,product_category_id: params[:category])
-      elsif params[:search_product].present?
+      unless filter[:min_price] == ''
+        session[:filter]['min_price'] = filter[:min_price]
+        @products = @products.where("price >= ?", filter[:min_price])
+      end
+      unless filter[:max_price] == ''
+        session[:filter]['max_price'] = filter[:max_price]
+        @products = @products.where("price <= ?", filter[:max_price])
+      end
+      unless filter[:search] == ''
+        session[:filter]['search'] = filter[:search]
         name = Product.arel_table[:name]
-        @products = Product.where(available: true).where(name.matches("%#{params[:search_product]}%"))
-      else
-        @products = Product.where(available: true)
+        @products = @products.where(name.matches("%#{filter[:search]}%"))
       end
+    else
+      session[:filter] = {}
+      @products = Product.where(available: true)
     end
   end
 

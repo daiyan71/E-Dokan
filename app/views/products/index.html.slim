@@ -19,6 +19,7 @@ card#form
                 tr.text-center
                   th Product category
                   th Available
+                  th Featured
                   th Name
                   th Price
                   th Description
@@ -29,7 +30,8 @@ card#form
                 - @products.each do |product|
                   tr.shadow-style.clickable-row
                     td = link_to product.product_category.category_name, product.product_category
-                    td = product.available
+                    td = product.available? ? 'YES':'NO'
+                    td = product.featured? ? 'YES':'NO'
                     td = product.name
                     td = product.price
                     td = product.description

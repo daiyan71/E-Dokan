@@ -1,0 +1,36 @@
+header.bg-gray-500.py-5
+  .container.px-4.px-lg-5.my-5
+    .text-center.text-white
+      h1.display-4.fw-bolder
+        | Shop in style
+      p.lead.fw-normal.text-white-50.mb-0
+        | With E-Dokan
+section.py-5
+  .container
+    .row
+      .col-md-1
+      .col-md-10
+        = render 'home/filter_section'
+    - if @products.empty?
+      .m-2.text-center = "There is no item"
+    - else
+      .row
+        - @products.each do |product|
+          .col.m-5
+            .card.p-2.bg-gray-light
+              = image_tag product.image.url
+              .card-body.p-4.bg-gray-200
+                .text-center
+                  h5.fw-bolder.text-dark
+                    = product.name
+                  .d-flex.justify-content-center.small.text-white.mb-2
+                    = link_to "Details", product_details_path(product_id: product.id), method: :get, class: "text-dark"
+                  .d-flex.justify-content-center.small.text-dark.mb-2
+                    = show_price product.price
+                  .card-footer.p-4.pt-0.border-top-0.bg-transparent
+                    .text-center
+                      = link_to add_to_cart_path(product_id: product, quantity: 1), remote: true, class: "add-to-cart btn btn-default"
+                        i.fa.fa-shopping-cart
+                        span Add to cart
+
+= render 'added_to_cart_modal'

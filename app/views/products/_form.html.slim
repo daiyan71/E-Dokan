@@ -27,6 +27,13 @@
         fieldset.form-group
           .row
             .col-md-4
+              label Featured Product?
+              span.req-field title="required" *
+            .col-md-7
+              = f.check_box :featured, class: "check-box"
+        fieldset.form-group
+          .row
+            .col-md-4
               label Name
               span.req-field title="required" *
             .col-md-7

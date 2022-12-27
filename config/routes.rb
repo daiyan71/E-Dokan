@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     get :product_details
     get :add_to_cart
     get :cart
+    get :all_products
     delete :destroy_cart
     delete :destroy_cart_item
   end

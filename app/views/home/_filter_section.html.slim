@@ -1,0 +1,37 @@
+= form_with(url: all_products_path,
+        method: :get,
+        remote: false,
+        local: true,
+        class: 'form') do
+  .d-xl-flex.justify-content-center
+    .input-group.input-group-sm.m-2
+      .input-group-prepend.filter-label
+        span.input-group-text.text-dark.font-2xl Category
+        = collection_select :filter, :category, ProductCategory.all, :id, :category_name, {:prompt => true}, value: get_session_filter_data(session, 'filter','category'),
+            class: 'form-control form-control-sm'
+    .input-group.input-group-sm.m-2
+      .input-group-prepend.filter-label
+        span.input-group-text.text-dark.font-2xl Min Price
+        = text_field :filter, :min_price, value: get_session_filter_data(session, 'filter','min_price'),
+              class: 'form-control form-control-sm text-dark'
+    .input-group.input-group-sm.m-2
+      .input-group-prepend.filter-label
+        span.input-group-text.text-dark.font-2xl Max Price
+        = text_field :filter, :max_price, value: get_session_filter_data(session, 'filter','max_price'),
+              class: 'form-control form-control-sm'
+
+    .input-group.input-group-sm.m-2
+      .input-group-prepend.filter-label
+        span.input-group-text.text-dark.font-2xl Search
+        = text_field :filter, :search, placeholder: "Search..",  value: get_session_filter_data(session, 'filter','search'),
+            class: 'form-control form-control-sm'
+    .btn-group.ml-xl-2.ml-lg-5.d-flex
+      = button_tag type: 'submit', name: 'commit', value: 'filter', class: 'button btn btn-sm btn-success'
+        i.fa.fa-filter.mr-2 role='status'
+        span.spinner-border.spinner-border-sm.mr-2.d-none aria-hidden="true" role="status"
+        span Filter
+
+      = link_to all_products_path, class: 'button btn btn-sm btn-info text-white'
+        i.fa.fa-recycle.mr-2 role='status'
+        span.spinner-border.spinner-border-sm.mr-2.d-none aria-hidden="true" role="status"
+        span Clear
