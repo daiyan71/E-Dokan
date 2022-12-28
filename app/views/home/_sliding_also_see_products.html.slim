@@ -2,17 +2,17 @@
   .row
     .col-md-4
       h3
-        | Popular Products
+        | Also See
     .col-md-4.text-center
       .controls.float-xs-right.hidden-xs
-        a.left.fa.fa-chevron-left.btn.btn[href="#carousel-example3" data-slide="prev"]
-        a.right.fa.fa-chevron-right.btn[href="#carousel-example3" data-slide="next"]
+        a.left.fa.fa-chevron-left.btn.btn[href="#carousel-example" data-slide="prev"]
+        a.right.fa.fa-chevron-right.btn[href="#carousel-example" data-slide="next"]
   .row
-    #carousel-example3.carousel.slide.hidden-xs[data-ride="carousel"]
+    #carousel-example.carousel.slide.hidden-xs[data-ride="carousel"]
       .carousel-inner
         .item.active
           .row
-            - product = @popular_products[0]
+            - product = Product.all.sample
             .col-sm-3
               .col.m-5
                 .card.p-2.bg-gray-light
@@ -21,19 +21,19 @@
             .col-sm-3
               .col.m-5
                 .card.p-2.bg-gray-light
-                  - product = @popular_products[1]
+                  - product = Product.all.sample
                   = render 'product_card', locals = {product: product}
 
             .col-sm-3
               .col.m-5
                 .card.p-2.bg-gray-light
-                  - product = @popular_products[2]
+                  - product = Product.all.sample
                   = render 'product_card', locals = {product: product}
 
             .col-sm-3
               .col.m-5
                 .card.p-2.bg-gray-light
-                  - product = @popular_products[3]
+                  - product = Product.all.sample
                   = render 'product_card', locals = {product: product}
 
         .item
@@ -41,24 +41,24 @@
             .col-sm-3
               .col.m-5
                 .card.p-2.bg-gray-light
-                  - product = @popular_products[4]
+                  - product = Product.all.sample
                   = render 'product_card', locals = {product: product}
 
             .col-sm-3
               .col.m-5
                 .card.p-2.bg-gray-light
-                  - product = @popular_products[5]
+                  - product = Product.all.sample
                   = render 'product_card', locals = {product: product}
 
             .col-sm-3
               .col.m-5
                 .card.p-2.bg-gray-light
-                  - product = @popular_products[6]
+                  - product = Product.all.sample
                   = render 'product_card', locals = {product: product}
 
             .col-sm-3
               .col.m-5
                 .card.p-2.bg-gray-light
-                  - product = @popular_products[7]
+                  - product = Product.all.sample
                   = render 'product_card', locals = {product: product}
 

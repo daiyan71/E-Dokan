@@ -10,13 +10,14 @@ section.py-5
     .row
       .col-md-1
       .col-md-10
-    - if @products.empty?
-      .m-2.text-center = "There is no item"
-    - else
+        = render 'home/filter_section'
+    - if @featured_products.length >= 8
       .row
         = render 'sliding_featured_products'
+    - if @top_rated_products.length >= 8
       .row
         = render 'sliding_top_rated_products'
+    - if @popular_products.length >= 8
       .row
         = render 'sliding_popular_products'
 = render 'added_to_cart_modal'

@@ -2,7 +2,6 @@ class UserProfilesController < ApplicationController
   before_action :set_user, only: [:show]
 
   def show
-    @products = Product.all
   end
 
   private
