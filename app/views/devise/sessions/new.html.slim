@@ -1,36 +1,44 @@
 card#form
-  .card-header
-    .head
-      span.card-header-actions
-  .card.m-0
+  .card
+    h2.text-center = "SIGN IN"
+  .m-0
     .card-body.p-0
       .filter-section
       .show-list
         = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
           = render "devise/shared/error_messages", resource: resource
-          .card#forms
-            .card-body
-              .row.pl-0
-                .col-md-12
-                  fieldset.form-group
-                    .row
-                      .col-md-4
-                        label Email
-                      .col-md-7
-                        = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-sm"
-              .row.pl-0
-                .col-md-12
-                  fieldset.form-group
-                    .row
-                      .col-md-4
-                        label Password
-                      .col-md-7
-                        = f.password_field :password, autofocus: true, autocomplete: "current-password", class: "form-control form-control-sm"
-                  = button_tag type: 'submit', class: 'button btn btn-sm btn-success submit-button'
-                    i class = "icon-doc icons mt-0 mr-2" role="status"
-                    span.spinner-border.spinner-border-sm.mr-2.d-none aria-hidden="true" role="status"
-                    span = 'Signin'
-                  = link_to new_user_registration_path, class: 'button btn btn-sm btn-primary ml-3 text-white'
-                    i class = "icon-doc icons mt-0 mr-2" role="status"
-                    span.spinner-border.spinner-border-sm.mr-2.d-none aria-hidden="true" role="status"
-                    span = 'Signup'
+          .container
+            .row
+              .col-md-3
+              .col-md-6
+                .card#forms
+                  .card-body
+                    .row.pl-0
+                      .col-md-12
+                        fieldset.form-group
+                          .row
+                            .col-md-4
+                              label Email
+                            .col-md-7
+                              = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-sm"
+                    .row.pl-0
+                      .col-md-12
+                        fieldset.form-group
+                          .row
+                            .col-md-4
+                              label Password
+                            .col-md-7
+                              = f.password_field :password, autofocus: true, autocomplete: "current-password", class: "form-control form-control-sm"
+                        = button_tag type: 'submit', class: 'button btn btn-sm btn-success submit-button'
+                          i class = "icon-doc icons fa fa-sign-in mt-0 mr-2" role="status"
+                          span.spinner-border.spinner-border-sm.mr-2.d-none aria-hidden="true" role="status"
+                          span = 'Signin'
+                    .d-block
+                      .row
+                        = link_to new_user_registration_path, class: ''
+                          span.spinner-border.spinner-border-sm.mr-2.d-none aria-hidden="true" role="status"
+                          span = "Don't have an account? sign up now"
+                      .row
+                        = link_to new_password_path(resource_name), class: ''
+                          span.spinner-border.spinner-border-sm.mr-2.d-none aria-hidden="true" role="status"
+                          span = "Forgot your password?"

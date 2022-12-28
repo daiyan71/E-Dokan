@@ -1,80 +1,81 @@
 card#form
-  .card-header
-    .head
-      span.card-header-actions
-  .card.m-0
+  .card
+    h2.text-center = "Edit Account"
+  .m-0
     .card-body.p-0
       .filter-section
       .show-list
         = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
           = render "devise/shared/error_messages", resource: resource
           .card#forms
-            .card-body
-              .row.pl-0
-                .col-md-12
-                  fieldset.form-group
-                    .row
-                      .col-md-4
-                        label User Name
-                      .col-md-7
-                        = f.text_field :user_name, autofocus: true, autocomplete: "user_name", class: "form-control form-control-sm"
-              .row.pl-0
-                .col-md-12
-                  fieldset.form-group
-                    .row
-                      .col-md-4
-                        label Contact Number
-                      .col-md-7
-                        = f.text_field :contact_number, autofocus: true, autocomplete: "contact_number", class: "form-control form-control-sm"
-              .row.pl-0
-                .col-md-12
-                  fieldset.form-group
-                    .row
-                      .col-md-4
-                        label Email
-                      .col-md-7
-                        = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-sm"
-                  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-                    div
-                      = "Currently waiting confirmation for: #{resource.unconfirmed_email}"
-              .row.pl-0
-                .col-md-12
-                  fieldset.form-group
-                    .row
-                      .col-md-4
-                        label New Password
-                      .col-md-7
-                        = f.password_field :password, autocomplete: "new-password", class: "form-control form-control-sm"
-              .row.pl-0
-                .col-md-12
-                  fieldset.form-group
-                    .row
-                      .col-md-4
-                        label Password Confirmation
-                      .col-md-7
-                        = f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control form-control-sm"
-              .row.pl-0
-                .col-md-12
-                  fieldset.form-group
-                    .row
-                      .col-md-4
-                        label Current Password
-                      .col-md-7
-                        = f.password_field :current_password, autocomplete: "new-password", class: "form-control form-control-sm"
-              .row.pl-0
-                .col-md-12
-                  fieldset.form-group
-                    .row
-                      .col-md-4
-                        label Image
-                      .col-md-7
-                        = f.file_field :image, autofocus: true, class: "form-control form-control-sm"
-
-                  = button_tag type: 'submit', class: 'button btn btn-sm btn-success submit-button'
-                    i class = "icon-doc icons mt-0 mr-2" role="status"
-                    span.spinner-border.spinner-border-sm.mr-2.d-none aria-hidden="true" role="status"
-                    span = 'Update'
-                  = link_to :back, class: 'button btn btn-sm btn-primary ml-3 text-white'
-                    i class = "i fa fa-backward mt-0 mr-2" role="status"
-                    span.spinner-border.spinner-border-sm.mr-2.d-none aria-hidden="true" role="status"
-                    span = 'Back'
+            .row
+              .col-md-3
+              .col-md-6
+                .card-body
+                  .row.pl-0
+                    .col-md-12
+                      fieldset.form-group
+                        .row
+                          .col-md-4
+                            label User Name
+                          .col-md-7
+                            = f.text_field :user_name, autofocus: true, autocomplete: "user_name", class: "form-control form-control-sm"
+                  .row.pl-0
+                    .col-md-12
+                      fieldset.form-group
+                        .row
+                          .col-md-4
+                            label Contact Number
+                          .col-md-7
+                            = f.text_field :contact_number, autofocus: true, autocomplete: "contact_number", class: "form-control form-control-sm"
+                  .row.pl-0
+                    .col-md-12
+                      fieldset.form-group
+                        .row
+                          .col-md-4
+                            label Email
+                          .col-md-7
+                            = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-sm"
+                      - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+                        div
+                          = "Currently waiting confirmation for: #{resource.unconfirmed_email}"
+                  .row.pl-0
+                    .col-md-12
+                      fieldset.form-group
+                        .row
+                          .col-md-4
+                            label New Password
+                          .col-md-7
+                            = f.password_field :password, autocomplete: "new-password", class: "form-control form-control-sm"
+                  .row.pl-0
+                    .col-md-12
+                      fieldset.form-group
+                        .row
+                          .col-md-4
+                            label Password Confirmation
+                          .col-md-7
+                            = f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control form-control-sm"
+                  .row.pl-0
+                    .col-md-12
+                      fieldset.form-group
+                        .row
+                          .col-md-4
+                            label Current Password
+                          .col-md-7
+                            = f.password_field :current_password, autocomplete: "new-password", class: "form-control form-control-sm"
+                  .row.pl-0
+                    .col-md-12
+                      fieldset.form-group
+                        .row
+                          .col-md-4
+                            label Image
+                          .col-md-7
+                            = f.file_field :image, autofocus: true, class: "form-control form-control-sm"
+                      = button_tag type: 'submit', class: 'button btn btn-sm btn-success submit-button'
+                        i class = "icon-doc icons mt-0 mr-2" role="status"
+                        span.spinner-border.spinner-border-sm.mr-2.d-none aria-hidden="true" role="status"
+                        span = 'Update'
+                      = link_to :back, class: 'button btn btn-sm btn-primary ml-3 text-white'
+                        i class = "i fa fa-backward mt-0 mr-2" role="status"
+                        span.spinner-border.spinner-border-sm.mr-2.d-none aria-hidden="true" role="status"
+                        span = 'Back'

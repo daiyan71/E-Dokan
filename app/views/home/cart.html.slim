@@ -1,8 +1,6 @@
 card#form
-  .card-header
-    .head
-      span.header-text = 'Cart'
-      span.card-header-actions
+  .card
+    h2.text-center = 'Cart'
   .card.m-0
     .card-body.p-0
       .filter-section
@@ -50,3 +48,5 @@ card#form
                     i.fa.fa-first-order.mr-2 role='status'
                     span.spinner-border.spinner-border-sm.mr-2.d-none aria-hidden="true" role="status"
                     span Place Order
+          = render 'sliding_also_see_products'
+          = render 'added_to_cart_modal'
