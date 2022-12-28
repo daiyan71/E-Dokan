@@ -1,9 +1,7 @@
 <h1>Complete your Payment Now</h1>
-<%=ENV['stripe_publishable_key']%>
-<%=ENV['db_user']%>
 <script src="https://js.stripe.com/v3/"></script>
 <script>
-    var stripe = Stripe('<%=ENV['STRIPE_PUBLISHABLE_KEY']%>');
+    var stripe = Stripe('<%= Rails.application.credentials.dig(:stripe, :STRIPE_PUBLISHABLE_KEY) %>');
 </script>
 <%= form_tag charges_path do %>
   <%=hidden_field_tag :order_id, @order.id %>
@@ -13,7 +11,7 @@
     </label>
   </article>
   <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-          data-key="<%=ENV['STRIPE_PUBLISHABLE_KEY']%>"
+          data-key="<%= Rails.application.credentials.dig(:stripe, :STRIPE_PUBLISHABLE_KEY) %>"
           data-description="A month's subscription"
           data-amount="<%= @order.total_amount %>"
           data-locale="auto">
