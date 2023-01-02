@@ -10,15 +10,15 @@ set :linked_files, %w{config/database.yml config/application.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}
 set :keep_releases, 5
 
-# set :rbenv_type, :system
-# set :rbenv_ruby, '2.6.3'
-# set :rbenv_custom_path, '/home/ubuntu/.rbenv'
-# set :rbenv_ruby_dir, '/home/ubuntu/.rbenv/versions/2.6.3'
-# set :rbenv_prefix,
-#     "RBENV_ROOT=#{fetch(:rbenv_custom_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_custom_path)}/bin/rbenv exec"
-# set :rbenv_map_bins, %w(rake gem bundle ruby rails)
-set :rvm_type, :user
-set :rvm_ruby_version, 'ruby-2.6.3' # Edit this if you are using MRI Ruby
+set :rbenv_type, :system
+set :rbenv_ruby, '2.6.3'
+set :rbenv_custom_path, '/home/ubuntu/.rbenv'
+set :rbenv_ruby_dir, '/home/ubuntu/.rbenv/versions/2.6.3'
+set :rbenv_prefix,
+    "RBENV_ROOT=#{fetch(:rbenv_custom_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_custom_path)}/bin/rbenv exec"
+set :rbenv_map_bins, %w(rake gem bundle ruby rails)
+# set :rvm_type, :user
+# set :rvm_ruby_version, 'ruby-2.6.3' # Edit this if you are using MRI Ruby
 
 set :puma_rackup, -> { File.join(current_path, 'config.ru') }
 set :puma_state, "#{shared_path}/tmp/pids/puma.state"
