@@ -7,7 +7,6 @@
 # Ignore bundler config.
 /.bundle
 /.env
-/e-dokan.pem
 
 /config/application.yml
 /public/uploads/*
