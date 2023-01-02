@@ -3,7 +3,7 @@ lock "~> 3.17.1"
 
 set :application, 'e-dokan'
 set :repo_url, 'git@github.com:daiyan71/E-Dokan.git' # Edit this to match your repository
-set :branch, :main
+set :branch, :deployment
 set :deploy_to, '/home/ubuntu/e_dokan'
 set :pty, true
 set :linked_files, %w{config/database.yml config/application.yml}

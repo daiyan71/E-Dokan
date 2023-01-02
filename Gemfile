@@ -47,7 +47,7 @@ gem 'devise'
 gem 'carrierwave', '~> 2.0'
 gem "mini_magick"
 gem 'font-awesome-rails'
-gem 'font-awesome-sass'
+# gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'money-rails'
 gem 'stripe-rails'
