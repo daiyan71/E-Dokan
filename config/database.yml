@@ -50,6 +50,6 @@ test:
 #
 production:
   <<: *default
-  database: e-dokan_production
+  database: e_dokan_production
   username: e-dokan
   password: <%= ENV['E-DOKAN_DATABASE_PASSWORD'] %>
