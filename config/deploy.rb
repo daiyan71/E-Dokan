@@ -1,8 +1,6 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.17.1"
 
-lock '3.5.0'
-
 set :application, "e-dokan"
 set :repo_url, "git@github.com:daiyan71/E-Dokan.git"
 set :branch, :aws_deploy
